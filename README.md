@@ -2,6 +2,20 @@
 
 A new Flutter project.
 
+## Localization
+
+The app supports Arabic and English. Translation strings are in
+`lib/l10n/arb/app_ar.arb` and `lib/l10n/arb/app_en.arb`; generated localization
+classes are in `lib/l10n/generated/`.
+
+After adding or changing translations, regenerate the localization classes with:
+
+```sh
+flutter gen-l10n
+```
+
+The language can be changed from the language menu in the app bar.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

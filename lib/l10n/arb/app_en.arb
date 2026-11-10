@@ -1,0 +1,10 @@
+{
+  "@@locale": "en",
+  "appTitle": "Sanad",
+  "homeTitle": "Sanad home",
+  "counterMessage": "You have pushed the button this many times:",
+  "increment": "Increment",
+  "changeLanguage": "Change language",
+  "languageArabic": "العربية",
+  "languageEnglish": "English"
+}
