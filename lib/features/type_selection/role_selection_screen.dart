@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../data/models/role_model.dart';
-import '../provider/type_provider.dart';
-import '../widgets/selection_btn.dart';
-import '../widgets/selection_cards.dart';
-import '../widgets/selection_header.dart';
+import 'package:sanad/features/type_selection/role_model.dart';
+import 'package:sanad/features/type_selection/selection_btn.dart';
+import 'package:sanad/features/type_selection/selection_cards.dart';
+import 'package:sanad/features/type_selection/selection_header.dart';
+import 'package:sanad/features/type_selection/type_provider.dart';
 
 class RoleSelectionScreen extends StatelessWidget {
   const RoleSelectionScreen({super.key});

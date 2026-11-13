@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_sprint_one/features/typeSelection/data/models/role_model.dart';
+import 'package:sanad/features/type_selection/role_model.dart';
 
 class RoleSelectionProvider extends ChangeNotifier {
 

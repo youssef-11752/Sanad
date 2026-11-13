@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../data/models/role_model.dart';
+import 'package:sanad/features/type_selection/role_model.dart';
 
 class SelectionCards extends StatelessWidget {
   final RoleModel role; // role from model file "client or provider"
