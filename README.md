@@ -14,7 +14,21 @@ After adding or changing translations, regenerate the localization classes with:
 flutter gen-l10n
 ```
 
-The language can be changed from the language menu in the app bar.
+The app uses the device locale.
+
+## Flutter SDK version
+
+This project uses Flutter 3.50.0 stable with Dart 3.14.0, pinned in `.fvmrc`.
+Install [FVM](https://fvm.app/) and run:
+
+```sh
+fvm install
+fvm flutter pub get
+fvm flutter test
+```
+
+GitHub Actions reads the same version from `.fvmrc` and runs the tests and web
+build for pushes and pull requests targeting `develop`.
 
 ## Getting Started
 
