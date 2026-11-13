@@ -6,5 +6,49 @@
   "increment": "Increment",
   "changeLanguage": "Change language",
   "languageArabic": "العربية",
-  "languageEnglish": "English"
+  "languageEnglish": "English",
+  "requestsTitle": "My requests",
+  "requestsSubtitle": "All your requests and appointments in one place",
+  "currentRequestsTab": "Current (1)",
+  "pastRequestsTab": "Previous (3)",
+  "currentOrdersSection": "Current requests",
+  "pastVisitsSection": "Your previous visits",
+  "scheduledVisitStatus": "Visit scheduled",
+  "currentServiceTitle": "Automatic washing machine repair",
+  "currentProviderInfo": "Ahmed Sayed • Nasr City",
+  "currentVisitDate": "Sunday, November 7 • 1–2 PM",
+  "trackRequestButton": "Track {requestId}",
+  "@trackRequestButton": {
+    "placeholders": {
+      "requestId": {
+        "type": "String"
+      }
+    }
+  },
+  "trackRequestComingSoon": "Details for request {requestId} are coming soon",
+  "@trackRequestComingSoon": {
+    "placeholders": {
+      "requestId": {
+        "type": "String"
+      }
+    }
+  },
+  "completedStatus": "Completed",
+  "completedRatedStatus": "Completed and rated",
+  "cancelledStatus": "Cancelled",
+  "pastRepairTitle": "Kitchen sink leak repair",
+  "pastRepairProvider": "Hossam Adel • Maadi",
+  "pastRepairDate": "October 28, 2026 • 4:30 PM",
+  "pastFridgeTitle": "Refrigerator maintenance",
+  "pastFridgeProvider": "Ahmed Sayed • Nasr City",
+  "pastFridgeDate": "September 15, 2026 • 3 PM",
+  "pastLightTitle": "Light fixture installation",
+  "pastLightProvider": "Ibrahim • Nasr City",
+  "pastLightDate": "September 1, 2026",
+  "newRequestButton": "Request a new service",
+  "newRequestComingSoon": "New request creation is coming soon",
+  "homeNavigation": "Home",
+  "categoriesNavigation": "Categories",
+  "myRequestsNavigation": "My requests",
+  "accountNavigation": "Account"
 }
