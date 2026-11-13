@@ -1,0 +1,10 @@
+{
+  "@@locale": "ar",
+  "appTitle": "سند",
+  "homeTitle": "الرئيسية",
+  "counterMessage": "عدد مرات الضغط على الزر:",
+  "increment": "زيادة",
+  "changeLanguage": "تغيير اللغة",
+  "languageArabic": "العربية",
+  "languageEnglish": "الإنجليزية"
+}
