@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_sprint_one/features/onBoarding/data/model/onboarding_model.dart';
-import 'package:flutter_intern_sprint_one/features/onBoarding/presentation/widgets/onboarding_appbar.dart';
-import 'package:flutter_intern_sprint_one/features/onBoarding/presentation/widgets/onboarding_btn.dart';
-import 'package:flutter_intern_sprint_one/features/onBoarding/presentation/widgets/onboarding_footer.dart';
-import 'package:flutter_intern_sprint_one/features/onBoarding/presentation/widgets/onboarding_indicator.dart';
-import 'package:flutter_intern_sprint_one/features/onBoarding/presentation/widgets/onboarding_page.dart';
+import 'package:sanad/features/onboarding/models/onboarding_model.dart';
+import 'package:sanad/features/onboarding/widgets/onboarding_appbar.dart';
+import 'package:sanad/features/onboarding/widgets/onboarding_btn.dart';
+import 'package:sanad/features/onboarding/widgets/onboarding_footer.dart';
+import 'package:sanad/features/onboarding/widgets/onboarding_indicator.dart';
+import 'package:sanad/features/onboarding/widgets/onboarding_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

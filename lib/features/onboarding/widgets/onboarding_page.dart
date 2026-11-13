@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_sprint_one/features/onBoarding/data/model/onboarding_model.dart';
+import 'package:sanad/features/onboarding/models/onboarding_model.dart';
 
 class OnboardingPage extends StatelessWidget {
   final OnboardingModel model;  // take model from model file 
