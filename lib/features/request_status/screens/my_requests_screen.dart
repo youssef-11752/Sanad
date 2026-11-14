@@ -169,27 +169,32 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                             ),
                             const SizedBox(height: 10),
                           ],
-                          const SizedBox(height: 4),
-                          OutlinedButton(
-                            onPressed: () => _showComingSoon(
-                              localizations.newRequestComingSoon,
-                            ),
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: requestTealColor,
-                              backgroundColor: requestCardColor,
-                              side: const BorderSide(color: requestBorderColor),
-                              minimumSize: const Size.fromHeight(40),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(9),
+                          // show this btn just for current tab
+                          if (_selectedTab == _RequestsTab.current) ...[
+                            const SizedBox(height: 4),
+                            OutlinedButton(
+                              onPressed: () => _showComingSoon(
+                                localizations.newRequestComingSoon,
+                              ),
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: requestTealColor,
+                                backgroundColor: requestCardColor,
+                                side: const BorderSide(
+                                  color: requestBorderColor,
+                                ),
+                                minimumSize: const Size.fromHeight(40),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(9),
+                                ),
+                              ),
+                              child: Text(
+                                localizations.newRequestButton,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                             ),
-                            child: Text(
-                              localizations.newRequestButton,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
+                          ],
                         ],
                       ),
                     ),
