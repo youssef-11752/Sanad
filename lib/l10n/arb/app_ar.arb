@@ -9,42 +9,30 @@
   "languageEnglish": "الإنجليزية",
   "requestsTitle": "طلباتي",
   "requestsSubtitle": "كل بياناتك واحتياجاتك في مكان واحد",
-  "currentRequestsTab": "الجارية (١)",
-  "pastRequestsTab": "السابقة (٣)",
+  "currentRequestsTab": "الجارية ({count})",
+  "@currentRequestsTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pastRequestsTab": "السابقة ({count})",
+  "@pastRequestsTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noCurrentOrders": "لا توجد طلبات حالية.",
+  "noPreviousOrders": "لا توجد طلبات سابقة.",
+  "ordersLoadError": "تعذر تحميل طلباتك.",
+  "retryButton": "إعادة المحاولة",
   "currentOrdersSection": "الطلبات الجارية",
   "pastVisitsSection": "من زياراتك السابقة",
-  "scheduledVisitStatus": "زيارة محجوزة",
-  "currentServiceTitle": "إصلاح غسالة أوتوماتيك",
-  "currentProviderInfo": "أحمد سيد • مدينة نصر",
-  "currentVisitDate": "الأحد ٧ نوفمبر • ١–٢ مساءً",
-  "trackRequestButton": "متابعة {requestId}",
-  "@trackRequestButton": {
-    "placeholders": {
-      "requestId": {
-        "type": "String"
-      }
-    }
-  },
-  "trackRequestComingSoon": "تفاصيل الطلب {requestId} قريبًا",
-  "@trackRequestComingSoon": {
-    "placeholders": {
-      "requestId": {
-        "type": "String"
-      }
-    }
-  },
-  "completedStatus": "مكتمل",
-  "completedRatedStatus": "مكتمل وتم التقييم",
-  "cancelledStatus": "ملغي",
-  "pastRepairTitle": "إصلاح تسريب حوض المطبخ",
-  "pastRepairProvider": "حسام عادل • المعادي",
-  "pastRepairDate": "٢٨ أكتوبر ٢٠٢٦ • ٤:٣٠ مساءً",
-  "pastFridgeTitle": "صيانة ثلاجة",
-  "pastFridgeProvider": "أحمد سيد • مدينة نصر",
-  "pastFridgeDate": "١٥ سبتمبر ٢٠٢٦ • ٣ مساءً",
-  "pastLightTitle": "تركيب وحدة إضاءة",
-  "pastLightProvider": "إبراهيم • مدينة نصر",
-  "pastLightDate": "١ سبتمبر ٢٠٢٦",
+  "pendingStatus": "قيد الانتظار",
+  "fulfilledStatus": "تم التنفيذ",
   "newRequestButton": "اطلب خدمة جديدة",
   "newRequestComingSoon": "إنشاء طلب جديد قريبًا",
   "homeNavigation": "الرئيسية",

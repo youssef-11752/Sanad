@@ -15,13 +15,6 @@ class PastRequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statusColor = request.isCancelled
-        ? const Color(0xFFF9E0D0)
-        : const Color(0xFFE5EED9);
-    final statusTextColor = request.isCancelled
-        ? requestRedColor
-        : requestTealColor;
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 9),
       decoration: BoxDecoration(
@@ -43,8 +36,8 @@ class PastRequestCard extends StatelessWidget {
                   alignment: AlignmentDirectional.centerEnd,
                   child: RequestStatusBadge(
                     label: statusLabel,
-                    backgroundColor: statusColor,
-                    foregroundColor: statusTextColor,
+                    backgroundColor: const Color(0xFFE5EED9),
+                    foregroundColor: requestTealColor,
                   ),
                 ),
               ),
@@ -67,10 +60,7 @@ class PastRequestCard extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             request.date,
-            style: TextStyle(
-              color: request.isCancelled ? requestRedColor : requestMutedColor,
-              fontSize: 9,
-            ),
+            style: const TextStyle(color: requestMutedColor, fontSize: 9),
           ),
         ],
       ),

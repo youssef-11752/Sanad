@@ -37,10 +37,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get requestsSubtitle => 'كل بياناتك واحتياجاتك في مكان واحد';
 
   @override
-  String get currentRequestsTab => 'الجارية (١)';
+  String currentRequestsTab(int count) {
+    return 'الجارية ($count)';
+  }
 
   @override
-  String get pastRequestsTab => 'السابقة (٣)';
+  String pastRequestsTab(int count) {
+    return 'السابقة ($count)';
+  }
+
+  @override
+  String get noCurrentOrders => 'لا توجد طلبات حالية.';
+
+  @override
+  String get noPreviousOrders => 'لا توجد طلبات سابقة.';
+
+  @override
+  String get ordersLoadError => 'تعذر تحميل طلباتك.';
+
+  @override
+  String get retryButton => 'إعادة المحاولة';
 
   @override
   String get currentOrdersSection => 'الطلبات الجارية';
@@ -49,62 +65,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pastVisitsSection => 'من زياراتك السابقة';
 
   @override
-  String get scheduledVisitStatus => 'زيارة محجوزة';
+  String get pendingStatus => 'قيد الانتظار';
 
   @override
-  String get currentServiceTitle => 'إصلاح غسالة أوتوماتيك';
-
-  @override
-  String get currentProviderInfo => 'أحمد سيد • مدينة نصر';
-
-  @override
-  String get currentVisitDate => 'الأحد ٧ نوفمبر • ١–٢ مساءً';
-
-  @override
-  String trackRequestButton(String requestId) {
-    return 'متابعة $requestId';
-  }
-
-  @override
-  String trackRequestComingSoon(String requestId) {
-    return 'تفاصيل الطلب $requestId قريبًا';
-  }
-
-  @override
-  String get completedStatus => 'مكتمل';
-
-  @override
-  String get completedRatedStatus => 'مكتمل وتم التقييم';
-
-  @override
-  String get cancelledStatus => 'ملغي';
-
-  @override
-  String get pastRepairTitle => 'إصلاح تسريب حوض المطبخ';
-
-  @override
-  String get pastRepairProvider => 'حسام عادل • المعادي';
-
-  @override
-  String get pastRepairDate => '٢٨ أكتوبر ٢٠٢٦ • ٤:٣٠ مساءً';
-
-  @override
-  String get pastFridgeTitle => 'صيانة ثلاجة';
-
-  @override
-  String get pastFridgeProvider => 'أحمد سيد • مدينة نصر';
-
-  @override
-  String get pastFridgeDate => '١٥ سبتمبر ٢٠٢٦ • ٣ مساءً';
-
-  @override
-  String get pastLightTitle => 'تركيب وحدة إضاءة';
-
-  @override
-  String get pastLightProvider => 'إبراهيم • مدينة نصر';
-
-  @override
-  String get pastLightDate => '١ سبتمبر ٢٠٢٦';
+  String get fulfilledStatus => 'تم التنفيذ';
 
   @override
   String get newRequestButton => 'اطلب خدمة جديدة';

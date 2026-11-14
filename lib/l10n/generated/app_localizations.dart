@@ -155,14 +155,38 @@ abstract class AppLocalizations {
   /// No description provided for @currentRequestsTab.
   ///
   /// In en, this message translates to:
-  /// **'Current (1)'**
-  String get currentRequestsTab;
+  /// **'Current ({count})'**
+  String currentRequestsTab(int count);
 
   /// No description provided for @pastRequestsTab.
   ///
   /// In en, this message translates to:
-  /// **'Previous (3)'**
-  String get pastRequestsTab;
+  /// **'Previous ({count})'**
+  String pastRequestsTab(int count);
+
+  /// No description provided for @noCurrentOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'No current orders.'**
+  String get noCurrentOrders;
+
+  /// No description provided for @noPreviousOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous orders.'**
+  String get noPreviousOrders;
+
+  /// No description provided for @ordersLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load your orders.'**
+  String get ordersLoadError;
+
+  /// No description provided for @retryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retryButton;
 
   /// No description provided for @currentOrdersSection.
   ///
@@ -176,113 +200,17 @@ abstract class AppLocalizations {
   /// **'Your previous visits'**
   String get pastVisitsSection;
 
-  /// No description provided for @scheduledVisitStatus.
+  /// No description provided for @pendingStatus.
   ///
   /// In en, this message translates to:
-  /// **'Visit scheduled'**
-  String get scheduledVisitStatus;
+  /// **'Pending'**
+  String get pendingStatus;
 
-  /// No description provided for @currentServiceTitle.
+  /// No description provided for @fulfilledStatus.
   ///
   /// In en, this message translates to:
-  /// **'Automatic washing machine repair'**
-  String get currentServiceTitle;
-
-  /// No description provided for @currentProviderInfo.
-  ///
-  /// In en, this message translates to:
-  /// **'Ahmed Sayed • Nasr City'**
-  String get currentProviderInfo;
-
-  /// No description provided for @currentVisitDate.
-  ///
-  /// In en, this message translates to:
-  /// **'Sunday, November 7 • 1–2 PM'**
-  String get currentVisitDate;
-
-  /// No description provided for @trackRequestButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Track {requestId}'**
-  String trackRequestButton(String requestId);
-
-  /// No description provided for @trackRequestComingSoon.
-  ///
-  /// In en, this message translates to:
-  /// **'Details for request {requestId} are coming soon'**
-  String trackRequestComingSoon(String requestId);
-
-  /// No description provided for @completedStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get completedStatus;
-
-  /// No description provided for @completedRatedStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed and rated'**
-  String get completedRatedStatus;
-
-  /// No description provided for @cancelledStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancelled'**
-  String get cancelledStatus;
-
-  /// No description provided for @pastRepairTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Kitchen sink leak repair'**
-  String get pastRepairTitle;
-
-  /// No description provided for @pastRepairProvider.
-  ///
-  /// In en, this message translates to:
-  /// **'Hossam Adel • Maadi'**
-  String get pastRepairProvider;
-
-  /// No description provided for @pastRepairDate.
-  ///
-  /// In en, this message translates to:
-  /// **'October 28, 2026 • 4:30 PM'**
-  String get pastRepairDate;
-
-  /// No description provided for @pastFridgeTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Refrigerator maintenance'**
-  String get pastFridgeTitle;
-
-  /// No description provided for @pastFridgeProvider.
-  ///
-  /// In en, this message translates to:
-  /// **'Ahmed Sayed • Nasr City'**
-  String get pastFridgeProvider;
-
-  /// No description provided for @pastFridgeDate.
-  ///
-  /// In en, this message translates to:
-  /// **'September 15, 2026 • 3 PM'**
-  String get pastFridgeDate;
-
-  /// No description provided for @pastLightTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Light fixture installation'**
-  String get pastLightTitle;
-
-  /// No description provided for @pastLightProvider.
-  ///
-  /// In en, this message translates to:
-  /// **'Ibrahim • Nasr City'**
-  String get pastLightProvider;
-
-  /// No description provided for @pastLightDate.
-  ///
-  /// In en, this message translates to:
-  /// **'September 1, 2026'**
-  String get pastLightDate;
+  /// **'Fulfilled'**
+  String get fulfilledStatus;
 
   /// No description provided for @newRequestButton.
   ///

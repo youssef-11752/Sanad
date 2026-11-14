@@ -38,10 +38,26 @@ class AppLocalizationsEn extends AppLocalizations {
       'All your requests and appointments in one place';
 
   @override
-  String get currentRequestsTab => 'Current (1)';
+  String currentRequestsTab(int count) {
+    return 'Current ($count)';
+  }
 
   @override
-  String get pastRequestsTab => 'Previous (3)';
+  String pastRequestsTab(int count) {
+    return 'Previous ($count)';
+  }
+
+  @override
+  String get noCurrentOrders => 'No current orders.';
+
+  @override
+  String get noPreviousOrders => 'No previous orders.';
+
+  @override
+  String get ordersLoadError => 'Couldn\'t load your orders.';
+
+  @override
+  String get retryButton => 'Retry';
 
   @override
   String get currentOrdersSection => 'Current requests';
@@ -50,62 +66,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pastVisitsSection => 'Your previous visits';
 
   @override
-  String get scheduledVisitStatus => 'Visit scheduled';
+  String get pendingStatus => 'Pending';
 
   @override
-  String get currentServiceTitle => 'Automatic washing machine repair';
-
-  @override
-  String get currentProviderInfo => 'Ahmed Sayed • Nasr City';
-
-  @override
-  String get currentVisitDate => 'Sunday, November 7 • 1–2 PM';
-
-  @override
-  String trackRequestButton(String requestId) {
-    return 'Track $requestId';
-  }
-
-  @override
-  String trackRequestComingSoon(String requestId) {
-    return 'Details for request $requestId are coming soon';
-  }
-
-  @override
-  String get completedStatus => 'Completed';
-
-  @override
-  String get completedRatedStatus => 'Completed and rated';
-
-  @override
-  String get cancelledStatus => 'Cancelled';
-
-  @override
-  String get pastRepairTitle => 'Kitchen sink leak repair';
-
-  @override
-  String get pastRepairProvider => 'Hossam Adel • Maadi';
-
-  @override
-  String get pastRepairDate => 'October 28, 2026 • 4:30 PM';
-
-  @override
-  String get pastFridgeTitle => 'Refrigerator maintenance';
-
-  @override
-  String get pastFridgeProvider => 'Ahmed Sayed • Nasr City';
-
-  @override
-  String get pastFridgeDate => 'September 15, 2026 • 3 PM';
-
-  @override
-  String get pastLightTitle => 'Light fixture installation';
-
-  @override
-  String get pastLightProvider => 'Ibrahim • Nasr City';
-
-  @override
-  String get pastLightDate => 'September 1, 2026';
+  String get fulfilledStatus => 'Fulfilled';
 
   @override
   String get newRequestButton => 'Request a new service';
