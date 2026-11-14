@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sanad/features/request_status/models/request_item.dart';
-import 'package:sanad/features/request_status/widgets/request_status_widgets.dart';
+import 'package:sanad/features/request_status/widgets/current_request_card.dart';
+import 'package:sanad/features/request_status/widgets/past_request_card.dart';
+import 'package:sanad/features/request_status/widgets/request_section_title.dart';
+import 'package:sanad/features/request_status/widgets/request_status_colors.dart';
+import 'package:sanad/features/request_status/widgets/requests_bottom_navigation.dart';
+import 'package:sanad/features/request_status/widgets/requests_header.dart';
+import 'package:sanad/features/request_status/widgets/requests_tabs.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 
 enum _RequestsTab { current, previous }
