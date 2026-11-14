@@ -29,4 +29,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageEnglish => 'English';
+
+  @override
+  String get requestsTitle => 'My requests';
+
+  @override
+  String get requestsSubtitle =>
+      'All your requests and appointments in one place';
+
+  @override
+  String currentRequestsTab(int count) {
+    return 'Current ($count)';
+  }
+
+  @override
+  String pastRequestsTab(int count) {
+    return 'Previous ($count)';
+  }
+
+  @override
+  String get noCurrentOrders => 'No current orders.';
+
+  @override
+  String get noPreviousOrders => 'No previous orders.';
+
+  @override
+  String get ordersLoadError => 'Couldn\'t load your orders.';
+
+  @override
+  String get retryButton => 'Retry';
+
+  @override
+  String get currentOrdersSection => 'Current requests';
+
+  @override
+  String get pastVisitsSection => 'Your previous visits';
+
+  @override
+  String get pendingStatus => 'Pending';
+
+  @override
+  String get fulfilledStatus => 'Fulfilled';
+
+  @override
+  String get newRequestButton => 'Request a new service';
+
+  @override
+  String get newRequestComingSoon => 'New request creation is coming soon';
+
+  @override
+  String get homeNavigation => 'Home';
+
+  @override
+  String get categoriesNavigation => 'Categories';
+
+  @override
+  String get myRequestsNavigation => 'My requests';
+
+  @override
+  String get accountNavigation => 'Account';
 }

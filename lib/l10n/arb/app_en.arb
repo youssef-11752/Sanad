@@ -6,5 +6,37 @@
   "increment": "Increment",
   "changeLanguage": "Change language",
   "languageArabic": "العربية",
-  "languageEnglish": "English"
+  "languageEnglish": "English",
+  "requestsTitle": "My requests",
+  "requestsSubtitle": "All your requests and appointments in one place",
+  "currentRequestsTab": "Current ({count})",
+  "@currentRequestsTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pastRequestsTab": "Previous ({count})",
+  "@pastRequestsTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noCurrentOrders": "No current orders.",
+  "noPreviousOrders": "No previous orders.",
+  "ordersLoadError": "Couldn't load your orders.",
+  "retryButton": "Retry",
+  "currentOrdersSection": "Current requests",
+  "pastVisitsSection": "Your previous visits",
+  "pendingStatus": "Pending",
+  "fulfilledStatus": "Fulfilled",
+  "newRequestButton": "Request a new service",
+  "newRequestComingSoon": "New request creation is coming soon",
+  "homeNavigation": "Home",
+  "categoriesNavigation": "Categories",
+  "myRequestsNavigation": "My requests",
+  "accountNavigation": "Account"
 }

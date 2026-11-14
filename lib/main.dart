@@ -1,32 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sanad/features/request_status/screens/my_requests_screen.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, this.locale, this.supabaseInitialization});
+
+  final Locale? locale;
+  final Future<void>? supabaseInitialization;
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? _locale;
+  late Future<void> _supabaseInitialization;
 
-  void _changeLocale(Locale locale) {
+  @override
+  void initState() {
+    super.initState();
+    _supabaseInitialization =
+        widget.supabaseInitialization ?? _initializeSupabase();
+  }
+
+  Future<void> _initializeSupabase() async {
+    const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+    const supabasePublishableKey = String.fromEnvironment(
+      'SUPABASE_PUBLISHABLE_KEY',
+    );
+    if (supabaseUrl.isEmpty || supabasePublishableKey.isEmpty) {
+      throw StateError(
+        'Pass SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY using --dart-define.',
+      );
+    }
+
+    await Supabase.initialize(
+      url: supabaseUrl,
+      publishableKey: supabasePublishableKey,
+    );
+  }
+
+  void _retryInitialization() {
     setState(() {
-      _locale = locale;
+      _supabaseInitialization = _initializeSupabase();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-      locale: _locale,
+      locale: widget.locale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -35,71 +66,24 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
       ],
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: MyHomePage(onLocaleChanged: _changeLocale),
-    );
-  }
-}
+      home: FutureBuilder<void>(
+        future: _supabaseInitialization,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.onLocaleChanged});
+          if (snapshot.hasError) {
+            return MyRequestsScreen(
+              ordersLoadError: snapshot.error.toString(),
+              onRetry: _retryInitialization,
+            );
+          }
 
-  final ValueChanged<Locale> onLocaleChanged;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(localizations.homeTitle),
-        actions: [
-          PopupMenuButton<Locale>(
-            tooltip: localizations.changeLanguage,
-            onSelected: widget.onLocaleChanged,
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: const Locale('ar'),
-                child: Text(localizations.languageArabic),
-              ),
-              PopupMenuItem(
-                value: const Locale('en'),
-                child: Text(localizations.languageEnglish),
-              ),
-            ],
-            icon: const Icon(Icons.language),
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            Text(localizations.counterMessage),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: localizations.increment,
-        child: const Icon(Icons.add),
+          return const MyRequestsScreen();
+        },
       ),
     );
   }

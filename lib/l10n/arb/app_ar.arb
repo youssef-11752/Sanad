@@ -6,5 +6,37 @@
   "increment": "زيادة",
   "changeLanguage": "تغيير اللغة",
   "languageArabic": "العربية",
-  "languageEnglish": "الإنجليزية"
+  "languageEnglish": "الإنجليزية",
+  "requestsTitle": "طلباتي",
+  "requestsSubtitle": "كل بياناتك واحتياجاتك في مكان واحد",
+  "currentRequestsTab": "الجارية ({count})",
+  "@currentRequestsTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pastRequestsTab": "السابقة ({count})",
+  "@pastRequestsTab": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noCurrentOrders": "لا توجد طلبات حالية.",
+  "noPreviousOrders": "لا توجد طلبات سابقة.",
+  "ordersLoadError": "تعذر تحميل طلباتك.",
+  "retryButton": "إعادة المحاولة",
+  "currentOrdersSection": "الطلبات الجارية",
+  "pastVisitsSection": "من زياراتك السابقة",
+  "pendingStatus": "قيد الانتظار",
+  "fulfilledStatus": "تم التنفيذ",
+  "newRequestButton": "اطلب خدمة جديدة",
+  "newRequestComingSoon": "إنشاء طلب جديد قريبًا",
+  "homeNavigation": "الرئيسية",
+  "categoriesNavigation": "الأقسام",
+  "myRequestsNavigation": "طلباتي",
+  "accountNavigation": "حسابي"
 }

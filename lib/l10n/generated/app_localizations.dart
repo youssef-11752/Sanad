@@ -139,6 +139,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'English'**
   String get languageEnglish;
+
+  /// No description provided for @requestsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My requests'**
+  String get requestsTitle;
+
+  /// No description provided for @requestsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All your requests and appointments in one place'**
+  String get requestsSubtitle;
+
+  /// No description provided for @currentRequestsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Current ({count})'**
+  String currentRequestsTab(int count);
+
+  /// No description provided for @pastRequestsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous ({count})'**
+  String pastRequestsTab(int count);
+
+  /// No description provided for @noCurrentOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'No current orders.'**
+  String get noCurrentOrders;
+
+  /// No description provided for @noPreviousOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous orders.'**
+  String get noPreviousOrders;
+
+  /// No description provided for @ordersLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load your orders.'**
+  String get ordersLoadError;
+
+  /// No description provided for @retryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retryButton;
+
+  /// No description provided for @currentOrdersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Current requests'**
+  String get currentOrdersSection;
+
+  /// No description provided for @pastVisitsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Your previous visits'**
+  String get pastVisitsSection;
+
+  /// No description provided for @pendingStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pendingStatus;
+
+  /// No description provided for @fulfilledStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Fulfilled'**
+  String get fulfilledStatus;
+
+  /// No description provided for @newRequestButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Request a new service'**
+  String get newRequestButton;
+
+  /// No description provided for @newRequestComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'New request creation is coming soon'**
+  String get newRequestComingSoon;
+
+  /// No description provided for @homeNavigation.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get homeNavigation;
+
+  /// No description provided for @categoriesNavigation.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categoriesNavigation;
+
+  /// No description provided for @myRequestsNavigation.
+  ///
+  /// In en, this message translates to:
+  /// **'My requests'**
+  String get myRequestsNavigation;
+
+  /// No description provided for @accountNavigation.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get accountNavigation;
 }
 
 class _AppLocalizationsDelegate
