@@ -88,4 +88,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get accountNavigation => 'Account';
+
+  @override
+  String get categoriesTitle => 'All categories';
+
+  @override
+  String get categoriesSubtitle => 'Choose the service you need';
+
+  @override
+  String get homeServicesLabel => 'Home services';
+
+  @override
+  String get categoriesSearchHint => 'Search for a service or issue';
+
+  @override
+  String get categoriesNoResults => 'No categories match your search';
+
+  @override
+  String get navigationComingSoon => 'This section is coming soon';
+
+  @override
+  String categoryComingSoon(String category) {
+    return '$category services are coming soon';
+  }
+
+  @override
+  String get applianceCategory => 'Home appliance maintenance';
+
+  @override
+  String get applianceCategoryDescription =>
+      'Repair and maintenance for home appliances';
+
+  @override
+  String get paintingCategory => 'Painting';
+
+  @override
+  String get paintingCategoryDescription =>
+      'Painting, decor, and wall renovations';
+
+  @override
+  String get carpentryCategory => 'Carpentry';
+
+  @override
+  String get carpentryCategoryDescription =>
+      'Home furniture repair and carpentry';
+
+  @override
+  String get electricalCategory => 'Electrical';
+
+  @override
+  String get electricalCategoryDescription =>
+      'Home wiring, lighting, switches, and panels';
+
+  @override
+  String get airConditioningCategory => 'Air conditioning';
+
+  @override
+  String get airConditioningCategoryDescription =>
+      'Air conditioner repair and installation';
+
+  @override
+  String get plumbingCategory => 'Plumbing';
+
+  @override
+  String get plumbingCategoryDescription => 'Leak repair and pipe installation';
 }

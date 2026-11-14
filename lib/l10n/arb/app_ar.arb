@@ -38,5 +38,31 @@
   "homeNavigation": "الرئيسية",
   "categoriesNavigation": "الأقسام",
   "myRequestsNavigation": "طلباتي",
-  "accountNavigation": "حسابي"
+  "accountNavigation": "حسابي",
+  "categoriesTitle": "كل الأقسام",
+  "categoriesSubtitle": "اختار الخدمة المناسبة لك",
+  "homeServicesLabel": "خدمات المنزل",
+  "categoriesSearchHint": "ابحث عن خدمة أو عطل",
+  "categoriesNoResults": "مفيش أقسام مطابقة لبحثك",
+  "navigationComingSoon": "القسم ده هيتاح قريبًا",
+  "categoryComingSoon": "خدمات {category} هتكون متاحة قريبًا",
+  "@categoryComingSoon": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "applianceCategory": "صيانة الأجهزة المنزلية",
+  "applianceCategoryDescription": "صيانة وإصلاح جميع الأجهزة المنزلية",
+  "paintingCategory": "النقاشة",
+  "paintingCategoryDescription": "دهان وديكورات وتجديد الحوائط",
+  "carpentryCategory": "النجارة",
+  "carpentryCategoryDescription": "أعمال صيانة ونجارة الأثاث المنزلي",
+  "electricalCategory": "الكهرباء",
+  "electricalCategoryDescription": "كهرباء وإنارة ومفاتيح ولوحات",
+  "airConditioningCategory": "صيانة المكيفات",
+  "airConditioningCategoryDescription": "صيانة وتركيب مكيفات الهواء",
+  "plumbingCategory": "السباكة",
+  "plumbingCategoryDescription": "إصلاح تسريبات وتركيب المواسير"
 }

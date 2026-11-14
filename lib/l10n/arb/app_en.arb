@@ -38,5 +38,31 @@
   "homeNavigation": "Home",
   "categoriesNavigation": "Categories",
   "myRequestsNavigation": "My requests",
-  "accountNavigation": "Account"
+  "accountNavigation": "Account",
+  "categoriesTitle": "All categories",
+  "categoriesSubtitle": "Choose the service you need",
+  "homeServicesLabel": "Home services",
+  "categoriesSearchHint": "Search for a service or issue",
+  "categoriesNoResults": "No categories match your search",
+  "navigationComingSoon": "This section is coming soon",
+  "categoryComingSoon": "{category} services are coming soon",
+  "@categoryComingSoon": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "applianceCategory": "Home appliance maintenance",
+  "applianceCategoryDescription": "Repair and maintenance for home appliances",
+  "paintingCategory": "Painting",
+  "paintingCategoryDescription": "Painting, decor, and wall renovations",
+  "carpentryCategory": "Carpentry",
+  "carpentryCategoryDescription": "Home furniture repair and carpentry",
+  "electricalCategory": "Electrical",
+  "electricalCategoryDescription": "Home wiring, lighting, switches, and panels",
+  "airConditioningCategory": "Air conditioning",
+  "airConditioningCategoryDescription": "Air conditioner repair and installation",
+  "plumbingCategory": "Plumbing",
+  "plumbingCategoryDescription": "Leak repair and pipe installation"
 }

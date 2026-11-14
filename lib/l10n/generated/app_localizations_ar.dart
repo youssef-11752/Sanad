@@ -87,4 +87,65 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get accountNavigation => 'حسابي';
+
+  @override
+  String get categoriesTitle => 'كل الأقسام';
+
+  @override
+  String get categoriesSubtitle => 'اختار الخدمة المناسبة لك';
+
+  @override
+  String get homeServicesLabel => 'خدمات المنزل';
+
+  @override
+  String get categoriesSearchHint => 'ابحث عن خدمة أو عطل';
+
+  @override
+  String get categoriesNoResults => 'مفيش أقسام مطابقة لبحثك';
+
+  @override
+  String get navigationComingSoon => 'القسم ده هيتاح قريبًا';
+
+  @override
+  String categoryComingSoon(String category) {
+    return 'خدمات $category هتكون متاحة قريبًا';
+  }
+
+  @override
+  String get applianceCategory => 'صيانة الأجهزة المنزلية';
+
+  @override
+  String get applianceCategoryDescription =>
+      'صيانة وإصلاح جميع الأجهزة المنزلية';
+
+  @override
+  String get paintingCategory => 'النقاشة';
+
+  @override
+  String get paintingCategoryDescription => 'دهان وديكورات وتجديد الحوائط';
+
+  @override
+  String get carpentryCategory => 'النجارة';
+
+  @override
+  String get carpentryCategoryDescription =>
+      'أعمال صيانة ونجارة الأثاث المنزلي';
+
+  @override
+  String get electricalCategory => 'الكهرباء';
+
+  @override
+  String get electricalCategoryDescription => 'كهرباء وإنارة ومفاتيح ولوحات';
+
+  @override
+  String get airConditioningCategory => 'صيانة المكيفات';
+
+  @override
+  String get airConditioningCategoryDescription => 'صيانة وتركيب مكيفات الهواء';
+
+  @override
+  String get plumbingCategory => 'السباكة';
+
+  @override
+  String get plumbingCategoryDescription => 'إصلاح تسريبات وتركيب المواسير';
 }

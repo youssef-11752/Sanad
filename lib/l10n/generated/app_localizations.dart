@@ -247,6 +247,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Account'**
   String get accountNavigation;
+
+  /// No description provided for @categoriesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All categories'**
+  String get categoriesTitle;
+
+  /// No description provided for @categoriesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the service you need'**
+  String get categoriesSubtitle;
+
+  /// No description provided for @homeServicesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Home services'**
+  String get homeServicesLabel;
+
+  /// No description provided for @categoriesSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a service or issue'**
+  String get categoriesSearchHint;
+
+  /// No description provided for @categoriesNoResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories match your search'**
+  String get categoriesNoResults;
+
+  /// No description provided for @navigationComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'This section is coming soon'**
+  String get navigationComingSoon;
+
+  /// No description provided for @categoryComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'{category} services are coming soon'**
+  String categoryComingSoon(String category);
+
+  /// No description provided for @applianceCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Home appliance maintenance'**
+  String get applianceCategory;
+
+  /// No description provided for @applianceCategoryDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair and maintenance for home appliances'**
+  String get applianceCategoryDescription;
+
+  /// No description provided for @paintingCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Painting'**
+  String get paintingCategory;
+
+  /// No description provided for @paintingCategoryDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Painting, decor, and wall renovations'**
+  String get paintingCategoryDescription;
+
+  /// No description provided for @carpentryCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Carpentry'**
+  String get carpentryCategory;
+
+  /// No description provided for @carpentryCategoryDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Home furniture repair and carpentry'**
+  String get carpentryCategoryDescription;
+
+  /// No description provided for @electricalCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Electrical'**
+  String get electricalCategory;
+
+  /// No description provided for @electricalCategoryDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Home wiring, lighting, switches, and panels'**
+  String get electricalCategoryDescription;
+
+  /// No description provided for @airConditioningCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Air conditioning'**
+  String get airConditioningCategory;
+
+  /// No description provided for @airConditioningCategoryDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Air conditioner repair and installation'**
+  String get airConditioningCategoryDescription;
+
+  /// No description provided for @plumbingCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Plumbing'**
+  String get plumbingCategory;
+
+  /// No description provided for @plumbingCategoryDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Leak repair and pipe installation'**
+  String get plumbingCategoryDescription;
 }
 
 class _AppLocalizationsDelegate
