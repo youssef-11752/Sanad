@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sanad/features/main_navigation/widgets/main_bottom_navigation.dart';
 import 'package:sanad/features/request_status/models/request_item.dart';
 import 'package:sanad/features/request_status/widgets/current_request_card.dart';
 import 'package:sanad/features/request_status/widgets/past_request_card.dart';
 import 'package:sanad/features/request_status/widgets/request_section_title.dart';
 import 'package:sanad/features/request_status/widgets/request_status_colors.dart';
-import 'package:sanad/features/request_status/widgets/requests_bottom_navigation.dart';
 import 'package:sanad/features/request_status/widgets/requests_header.dart';
 import 'package:sanad/features/request_status/widgets/requests_tabs.dart';
+import 'package:sanad/features/service_categories/screens/service_categories_screen.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -57,6 +58,29 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
   void _showComingSoon(String message) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void _handleNavigation(
+    MainNavigationDestination destination,
+    AppLocalizations localizations,
+  ) {
+    switch (destination) {
+      case MainNavigationDestination.requests:
+        return;
+
+      case MainNavigationDestination.categories:
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute<void>(
+            builder: (_) => const ServiceCategoriesScreen(),
+          ),
+        );
+        return;
+
+      case MainNavigationDestination.home:
+      case MainNavigationDestination.account:
+        _showComingSoon(localizations.navigationComingSoon);
+        return;
+    }
   }
 
   String _statusLabel(RequestStatus status, AppLocalizations localizations) {
@@ -125,9 +149,11 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
         final requests = hasLoadError
             ? const <RequestItem>[]
             : snapshot.requireData;
+
         final pendingRequests = requests
             .where((request) => request.status == RequestStatus.pending)
             .toList();
+
         final fulfilledRequests = requests
             .where((request) => request.status == RequestStatus.fulfilled)
             .toList();
@@ -214,7 +240,6 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                         const SizedBox(height: 10),
                       ],
                   ],
-                  // show this btn just for current tab
                   if (_selectedTab == _RequestsTab.current) ...[
                     const SizedBox(height: 4),
                     OutlinedButton(
@@ -258,11 +283,14 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
           child: Column(
             children: [
               Expanded(child: _buildOrdersContent(localizations, isArabic)),
-              RequestsBottomNavigation(
+              MainBottomNavigation(
+                selectedDestination: MainNavigationDestination.requests,
                 homeLabel: localizations.homeNavigation,
                 categoriesLabel: localizations.categoriesNavigation,
                 requestsLabel: localizations.myRequestsNavigation,
                 accountLabel: localizations.accountNavigation,
+                onDestinationSelected: (destination) =>
+                    _handleNavigation(destination, localizations),
               ),
             ],
           ),
