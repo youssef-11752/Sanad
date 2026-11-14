@@ -1,12 +1,19 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sanad/core/routes/app_router.dart';
 import 'package:sanad/features/request_status/screens/my_requests_screen.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  await Supabase.initialize(
+    url: 'https://kdzvfetkbgicvfgedpuc.supabase.co',
+    publishableKey: 'sb_publishable_r3XiLkp2Ny-9pay-MbEtBg_1mY4Z1TT',
+  );
+  runApp(DevicePreview(builder: (context) => const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -23,67 +30,25 @@ class _MyAppState extends State<MyApp> {
   late Future<void> _supabaseInitialization;
 
   @override
-  void initState() {
-    super.initState();
-    _supabaseInitialization =
-        widget.supabaseInitialization ?? _initializeSupabase();
-  }
-
-  Future<void> _initializeSupabase() async {
-    const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
-    const supabasePublishableKey = String.fromEnvironment(
-      'SUPABASE_PUBLISHABLE_KEY',
-    );
-    if (supabaseUrl.isEmpty || supabasePublishableKey.isEmpty) {
-      throw StateError(
-        'Pass SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY using --dart-define.',
-      );
-    }
-
-    await Supabase.initialize(
-      url: supabaseUrl,
-      publishableKey: supabasePublishableKey,
-    );
-  }
-
-  void _retryInitialization() {
-    setState(() {
-      _supabaseInitialization = _initializeSupabase();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-      locale: widget.locale,
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: FutureBuilder<void>(
-        future: _supabaseInitialization,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          }
-
-          if (snapshot.hasError) {
-            return MyRequestsScreen(
-              ordersLoadError: snapshot.error.toString(),
-              onRetry: _retryInitialization,
-            );
-          }
-
-          return const MyRequestsScreen();
-        },
+    return ScreenUtilInit(
+      designSize: Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: MaterialApp.router(
+        builder: DevicePreview.appBuilder,
+        debugShowCheckedModeBanner: false,
+        onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+        locale: widget.locale,
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+              routerConfig: router,
       ),
     );
   }

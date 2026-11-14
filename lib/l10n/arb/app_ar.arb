@@ -1,3 +1,4 @@
+
 {
   "@@locale": "ar",
   "appTitle": "سند",
@@ -38,5 +39,71 @@
   "homeNavigation": "الرئيسية",
   "categoriesNavigation": "الأقسام",
   "myRequestsNavigation": "طلباتي",
-  "accountNavigation": "حسابي"
+  "accountNavigation": "حسابي",
+
+  "appName": "سَنَد",
+  "splashTagline": "كل صنعة، لها سَنَد.",
+  "splashFooter": "سَنَد لكل بيت",
+
+  "phoneNumber": "رقم الموبايل",
+  "nationalId": "الرقم القومي",
+  "email": "الإيميل",
+  "password": "كلمة المرور",
+  "fullName": "الاسم بالكامل",
+  "city": "المدينة",
+  "area": "المنطقة",
+
+  "loginTitle": "نورت سَنَد من جديد.",
+  "loginSubtitle": "ادخل لحسابك، وخلّي الباقي علينا 😏 .",
+  "forgotPasswordLink": "نسيت كلمة المرور؟",
+  "loginButton": "تسجيل الدخول",
+  "dataSecurityNote": "بياناتك بأمان. رقمك وعنوانك لا يظهران إلا للمتخصص بعد تأكيد الزيارة.",
+  "firstTimeHere": "  أول مرة معانا؟",
+  "createNewAccount": "إنشاء حساب جديد ",
+  "termsAgreementNote": "بالمتابعة، أنت توافق على سياسة الخدمة والخصوصية.",
+
+  "registerTitle": "حساب جديد",
+  "registerSubtitle": "أهلاً بيك في دايرة سَنَد",
+  "passwordHint": "٨ أحرف على الأقل، تشمل حرفًا ورقمًا.",
+  "agreeToPrivacyAndTerms": "أوافق على سياسة الخصوصية وشروط الخدمة",
+  "createAccountButton": "إنشاء حساب",
+  "haveAccount": "عندك حساب؟",
+
+  "forgotPasswordTitle": "نسيت كلمة المرور",
+  "enterYourEmail": "ادخل الايميل",
+  "sendOtpButton": "إرسال رقم سري",
+  "verifyOtpButton": "تحقق من الرقم السري",
+
+  "otpTitle": "إدخال رقمك",
+  "otpMessage": "لقد أرسلنا رمز تأكيد مكونًا من 6 أرقام اليك  تأكد من إدخال الرمز الصحيح.",
+  "otpResendButton": "إعادة إرسال الرمز",
+
+  "newPasswordTitle": "كلمة مرور جديدة",
+  "enterNewPassword": "برجاء إدخال كلمة مرور جديدة",
+  "confirmPassword": "إعادة إدخال كلمة المرور",
+  "doneButton": "تم",
+
+  "passwordResetSuccessPrefix": "تم تجديد كلمة المرور بنجاح برجاء ",
+  "passwordResetSuccessAction": "تسجيل الدخول",
+  "goToLoginButton": "الذهاب الى تسجيل الدخول",
+
+  "hintFullName": "مثال: مريم حسن",
+  "hintPhone": "01135045965",
+  "hintNationalId": "14 رقم",
+  "hintEmail": "example@gmail.com",
+  "hintCity": "اختار المدينة",
+  "hintArea": "اختار المنطقة",
+  "hintPassword": "ادخل كلمة المرور",
+  "hintConfirmPassword": "أعد إدخال كلمة المرور",
+  "hintOtp": "ادخل الرمز",
+
+  "errorFieldRequired": "هذا الحقل مطلوب",
+  "errorInvalidPhone": "رقم الموبايل غير صحيح",
+  "errorInvalidNationalId": "الرقم القومي غير صحيح",
+  "errorInvalidEmail": "الإيميل غير صحيح",
+  "errorPasswordTooShort": "كلمة المرور يجب ألا تقل عن ٨ أحرف",
+  "errorPasswordWeak": "كلمة المرور يجب أن تشمل حرفًا ورقمًا",
+  "errorPasswordsNotMatch": "كلمتا المرور غير متطابقتين",
+  "errorInvalidOtp": "الرمز غير صحيح",
+  "errorMustAgreeTerms": "يجب الموافقة على سياسة الخصوصية وشروط الخدمة"
 }

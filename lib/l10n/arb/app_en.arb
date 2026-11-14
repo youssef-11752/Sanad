@@ -1,3 +1,4 @@
+
 {
   "@@locale": "en",
   "appTitle": "Sanad",
@@ -38,5 +39,71 @@
   "homeNavigation": "Home",
   "categoriesNavigation": "Categories",
   "myRequestsNavigation": "My requests",
-  "accountNavigation": "Account"
+  "accountNavigation": "Account",
+
+  "appName": "Sanad",
+  "splashTagline": "Every craft has its Sanad.",
+  "splashFooter": "Sanad for every home",
+
+  "phoneNumber": "Phone number",
+  "nationalId": "National ID",
+  "email": "Email",
+  "password": "Password",
+  "fullName": "Full name",
+  "city": "City",
+  "area": "Area",
+
+  "loginTitle": "Welcome back to Sanad.",
+  "loginSubtitle": "Log in to your account, and leave the rest to us 😏 .",
+  "forgotPasswordLink": "Forgot password?",
+  "loginButton": "Log in",
+  "dataSecurityNote": "Your data is safe. Your number and address are only shown to the professional after the visit is confirmed.",
+  "firstTimeHere": "First time here?",
+  "createNewAccount": "Create a new account",
+  "termsAgreementNote": "By continuing, you agree to the Terms of Service and Privacy Policy.",
+
+  "registerTitle": "New account",
+  "registerSubtitle": "Welcome to the Sanad circle",
+  "passwordHint": "At least 8 characters, including a letter and a number.",
+  "agreeToPrivacyAndTerms": "I agree to the Privacy Policy and Terms of Service",
+  "createAccountButton": "Create account",
+  "haveAccount": "Already have an account?",
+
+  "forgotPasswordTitle": "Forgot password",
+  "enterYourEmail": "Enter your Email ",
+  "sendOtpButton": "Send code",
+  "verifyOtpButton": "Verify Your OTP",
+
+  "otpTitle": "Enter your code",
+  "otpMessage": "We sent a 6-digit verification code to You Make sure you enter the correct code.",
+  "otpResendButton": "Resend code",
+
+  "newPasswordTitle": "New password",
+  "enterNewPassword": "Please enter a new password",
+  "confirmPassword": "Confirm password",
+  "doneButton": "Done",
+
+  "passwordResetSuccessPrefix": "Your password has been reset successfully. Please ",
+  "passwordResetSuccessAction": "log in",
+  "goToLoginButton": "Go to login",
+
+  "hintFullName": "e.g. Mariam Hassan",
+  "hintPhone": "01135045965",
+  "hintNationalId": "14 digits",
+  "hintEmail": "example@gmail.com",
+  "hintCity": "Select your city",
+  "hintArea": "Select your area",
+  "hintPassword": "Enter your password",
+  "hintConfirmPassword": "Re-enter your password",
+  "hintOtp": "Enter the code",
+
+  "errorFieldRequired": "This field is required",
+  "errorInvalidPhone": "Invalid phone number",
+  "errorInvalidNationalId": "Invalid national ID",
+  "errorInvalidEmail": "Invalid email",
+  "errorPasswordTooShort": "Password must be at least 8 characters",
+  "errorPasswordWeak": "Password must include a letter and a number",
+  "errorPasswordsNotMatch": "Passwords do not match",
+  "errorInvalidOtp": "Invalid code",
+  "errorMustAgreeTerms": "You must agree to the Privacy Policy and Terms of Service"
 }
