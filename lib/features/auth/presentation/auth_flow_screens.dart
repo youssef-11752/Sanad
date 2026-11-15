@@ -33,6 +33,7 @@ class _SignupScreenState extends State<SignupScreen> {
     super.dispose();
   }
 
+  // Create the account using the role selected before authentication.
   Future<void> _submit() async {
     final strings = AuthStrings.of(context);
     if (!_formKey.currentState!.validate() || _isSubmitting) return;
@@ -240,6 +241,7 @@ class _OtpScreenState extends State<OtpScreen> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate() || _isSubmitting) return;
     setState(() => _isSubmitting = true);
+    // Continue only after Supabase verifies the recovery code.
     final success = await Auth().verifyOtp(widget.email, _code.text.trim(), context);
     if (!mounted) return;
     setState(() => _isSubmitting = false);
@@ -308,6 +310,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate() || _isSubmitting) return;
     setState(() => _isSubmitting = true);
+    // OTP verification must establish a session before the password is updated.
     final success = await Auth().resetPassword(_password.text, context);
     if (!mounted) return;
     setState(() => _isSubmitting = false);
