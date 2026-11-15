@@ -4,6 +4,10 @@ import 'package:sanad/features/auth/data/model/user_role.dart';
 import 'package:sanad/features/auth/presentation/auth_strings.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+/// Handles Supabase authentication and Sanad's database-backed user roles.
+///
+/// The profile trigger creates public.users after Supabase Auth sign-up;
+/// this repository reads that profile to validate the selected role at login.
 class Auth {
   SupabaseClient get _client => Supabase.instance.client;
 
@@ -15,6 +19,7 @@ class Auth {
   }) async {
     final strings = AuthStrings.of(context);
     try {
+      // First authenticate the credentials with Supabase Auth.
       final response = await _client.auth.signInWithPassword(
         email: email,
         password: password,
@@ -27,6 +32,7 @@ class Auth {
 
       // Resolve the account type from the existing public.users ->
       // public.user_types relationship. Never authorize using user_metadata.
+      // Compare the requested role with the trusted database assignment.
       final assignedRole = await _assignedRole(user.id);
 
       if (assignedRole == null) {
@@ -61,6 +67,7 @@ class Auth {
     }
   }
 
+  // Resolve users.user_type_id through the related user_types row.
   Future<String?> _assignedRole(String userId) async {
     final profile = await _client
         .from('users')
@@ -94,6 +101,8 @@ class Auth {
         return false;
       }
 
+      // The database trigger consumes this metadata and creates public.users.
+      // The role is normalized before it reaches the trigger.
       await _client.auth.signUp(
         email: email,
         password: password,
@@ -129,6 +138,7 @@ class Auth {
   Future<bool> sendOtp(String email, BuildContext context) async {
     final strings = AuthStrings.of(context);
     try {
+      // Supabase's recovery email template controls whether it sends a link or OTP.
       await _client.auth.resetPasswordForEmail(email);
       if (!context.mounted) return false;
       _showMessage(
@@ -150,6 +160,7 @@ class Auth {
   Future<bool> verifyOtp(String email, String otp, BuildContext context) async {
     final strings = AuthStrings.of(context);
     try {
+      // Verify the recovery code and establish a password-recovery session.
       await _client.auth.verifyOTP(email: email, token: otp, type: OtpType.recovery);
       return true;
     } on AuthException catch (error) {
@@ -166,6 +177,7 @@ class Auth {
   Future<bool> resetPassword(String newPassword, BuildContext context) async {
     final strings = AuthStrings.of(context);
     try {
+      // A valid recovery session is required before changing the password.
       await _client.auth.updateUser(UserAttributes(password: newPassword));
       if (!context.mounted) return false;
       _showMessage(context, strings.passwordResetDone);
