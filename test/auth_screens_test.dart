@@ -5,7 +5,7 @@ import 'package:sanad/features/auth/presentation/auth_flow_screens.dart';
 
 void main() {
   // These widget tests validate the forms without making network calls to Supabase.
-  // Backend behavior is covered separately by the auth repository integration checks.
+  // Live auth integration still needs to be verified against the target Supabase project.
 
   testWidgets('customer login opens the shared login form', (tester) async {
     await tester.pumpWidget(
