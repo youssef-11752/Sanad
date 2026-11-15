@@ -138,17 +138,20 @@ class _RoleLoginScreenState extends State<RoleLoginScreen> {
                       const SizedBox(height: 18),
                       Text(strings.securityNote, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center),
                       const SizedBox(height: 16),
-                      Wrap(
-                        alignment: WrapAlignment.center,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Text(strings.noAccount),
-                          TextButton(
-                            onPressed: () => context.push('/signup/' + widget.role),
-                            child: Text(strings.createAccount),
-                          ),
-                        ],
-                      ),
+                      // Only customers can create an account from the public app.
+                      // Providers receive their credentials from the Sanad admin.
+                      if (!_isProvider)
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            Text(strings.noAccount),
+                            TextButton(
+                              onPressed: () => context.push('/signup/customer'),
+                              child: Text(strings.createAccount),
+                            ),
+                          ],
+                        ),
                       const SizedBox(height: 8),
                       Text(strings.termsNote, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center),
                     ],
