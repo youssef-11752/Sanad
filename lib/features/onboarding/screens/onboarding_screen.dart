@@ -1,118 +1,125 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/onboarding/models/onboarding_model.dart';
 import 'package:sanad/features/onboarding/widgets/onboarding_appbar.dart';
 import 'package:sanad/features/onboarding/widgets/onboarding_btn.dart';
 import 'package:sanad/features/onboarding/widgets/onboarding_footer.dart';
 import 'package:sanad/features/onboarding/widgets/onboarding_indicator.dart';
 import 'package:sanad/features/onboarding/widgets/onboarding_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  static const String completedKey = 'has_completed_onboarding';
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  // initial index for the start
-  int currentIndex = 0;
-// page controller that controls going from screen to another one
-  final PageController pageController = PageController();
-// list of data for the three screens
-  final List<OnboardingModel> onboardingPages = [
+  int _currentIndex = 0;
+  final PageController _pageController = PageController();
+  bool _isCompleting = false;
+
+  final List<OnboardingModel> _onboardingPages = [
     OnboardingModel(
-      title: 'كل صنعة، لها سند',
+      title: 'كل صنعة لها سند',
       description:
-          'من غسالتك لكهرباء بيتك, ومن النجارة لصيانة مركبتك, اطلب الخدمة المناسبة من مكان واحد',
+          'من غسالتك لكهرباء بيتك، ومن النجارة لصيانة مركبتك، اطلب الخدمة المناسبة من مكان واحد.',
       icon: Icons.home_repair_service_outlined,
       badge: 'سند · لكل بيت صنعة',
     ),
     OnboardingModel(
-      title: 'أهل خبرة، قريبين منك',
+      title: 'أهل خبرة قريبين منك',
       description:
-          'اختار متخصص موثق حسب نوع العطل, وشوف خبرته وتقييماته ورسوم الزيارة قبل ما تحجز',
+          'اختار متخصص موثوق حسب نوع العطل، وشوف خبرته وتقييماته ورسوم الزيارة قبل ما تحجز.',
       icon: Icons.engineering_outlined,
       badge: 'سند · لكل بيت صنعة',
     ),
     OnboardingModel(
-      title: 'من أول طلب، لحد ما تطمن',
+      title: 'سند معاك لحد ما الشغل يخلص',
       description:
-          'احكي المشكلة، حدد الزيارة، وتابع طلبك خطوة بخطوة, سند معاك لحد ما الشغل يخلص',
+          'احكي المشكلة، حدد الزيارة، وتابع طلبك خطوة بخطوة. سند معاك لحد ما الشغل يخلص.',
       icon: Icons.assignment_outlined,
       badge: 'سند · لكل بيت صنعة',
     ),
   ];
-// function that run when i press to go to the next page
-  void nextPage() {
-    if (currentIndex < onboardingPages.length - 1) {
-      pageController.nextPage(
+
+  Future<void> _completeOnboarding() async {
+    if (_isCompleting) return;
+    setState(() => _isCompleting = true);
+
+    try {
+      final preferences = await SharedPreferences.getInstance();
+      await preferences.setBool(OnboardingScreen.completedKey, true);
+    } catch (_) {
+      // Continue to role selection even if local persistence is unavailable.
+    }
+
+    if (!mounted) return;
+    context.go('/role-selection');
+  }
+
+  void _nextPage() {
+    if (_currentIndex < _onboardingPages.length - 1) {
+      _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
+      return;
     }
+    _completeOnboarding();
   }
-// skip function that runs when we press skip btn
-  void skipOnboarding() {
-    pageController.animateToPage(
-      onboardingPages.length - 1,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  }
-// to delete the controller from memory when we go out from the page
+
+  void _skipOnboarding() => _completeOnboarding();
+
   @override
   void dispose() {
-    pageController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 251, 245, 231),
-      body: SafeArea(
-        child: Column(
-          children: [ 
-            // calling appbat widget
-            OnboardingAppbar(
-              onSkip: skipOnboarding, // calling skip function
-              currentIndex: currentIndex, // calling currentindex 
-            ),
-
-            Expanded(
-              child: PageView(
-                controller: pageController,
-                reverse: true, // Make pages move from right to left
-                // change the index of the page when we go to another one
-                onPageChanged: (index) {
-                  setState(() {
-                    currentIndex = index; // reasign the index
-                  });
-                },
-                // convert the onboarding list into widgets then convert it again to list
-                children: onboardingPages.map((page) {
-                  return OnboardingPage(model: page); 
-                }).toList(),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        backgroundColor: AppThemes.cremeyColor,
+        body: SafeArea(
+          child: Column(
+            children: [
+              OnboardingAppbar(
+                onSkip: _skipOnboarding,
+                currentIndex: _currentIndex,
               ),
-            ),
-            // calling indicator widget
-            OnboardingIndicator(
-              currentIndex: currentIndex,
-              totalPages: onboardingPages.length, // totla length for the pages "3"
-            ),
-
-            SizedBox(height: 18),
-            // calling btn for the next page then for start "at the last page"
-            OnboardingBtn(
-              onPressed: nextPage, // calling next function
-              isLastPage: currentIndex == onboardingPages.length - 1, 
-            ),
-            // calling footer part that tells us which step are we in now
-            OnboardingFooter(
-              currentIndex: currentIndex, 
-              totalPages: onboardingPages.length, // total length of the pages "3"
-            ),
-          ],
+              Expanded(
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() => _currentIndex = index);
+                  },
+                  children: _onboardingPages
+                      .map((page) => OnboardingPage(model: page))
+                      .toList(),
+                ),
+              ),
+              OnboardingIndicator(
+                currentIndex: _currentIndex,
+                totalPages: _onboardingPages.length,
+              ),
+              const SizedBox(height: 18),
+              OnboardingBtn(
+                onPressed: _isCompleting ? () {} : _nextPage,
+                isLastPage: _currentIndex == _onboardingPages.length - 1,
+              ),
+              OnboardingFooter(
+                currentIndex: _currentIndex,
+                totalPages: _onboardingPages.length,
+              ),
+            ],
+          ),
         ),
       ),
     );
