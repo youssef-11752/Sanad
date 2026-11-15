@@ -28,6 +28,40 @@ The app also requires an authenticated Supabase session. Keep the `orders`
 table protected with row-level security; never use a service-role key in the
 client app.
 
+### Existing Sanad auth schema
+
+The Flutter auth flow uses the existing `public.users` and
+`public.user_types` tables shown in the Supabase schema:
+
+- `users.id` links the profile to `auth.users.id`.
+- `users.user_type_id` links to `user_types.id`.
+- `users.full_name`, `email`, `phone`, and `profile_image` hold the profile fields.
+- Login reads the role through the `users -> user_types` relationship. It does
+  not trust the editable `auth.users.raw_user_meta_data.role` value.
+
+Before testing new registrations, open the Supabase SQL Editor and run
+`supabase/migrations/20261115040000_auth_profiles_and_role_lookup.sql`.
+The migration installs a signup trigger that creates the matching
+`public.users` row, enables RLS on `users` and `user_types`, permits users to
+read only their own profile, and permits authenticated role-name lookup.
+
+The `user_types.name` column must contain one customer type and one provider
+type. Accepted customer labels are `customer`, `client`, `محتاج خدمة`,
+`محتاج خدمه`, or `عميل`. Accepted provider labels are `provider`,
+`service provider`, `مقدم الخدمة`, or `مقدم خدمه`. The trigger resolves
+the numeric `user_type_id` from those names; it does not assume fixed IDs.
+
+The current sign-up form also collects city and area as text. Those values are
+kept in auth metadata for now because the existing schema uses numeric
+`city_id`/country references and needs a proper city selector before those
+fields can safely be written to relational tables. Provider specialty and
+verification remain separate provider-profile work.
+
+The reference screens show phone/SMS verification, while the current auth UI
+still uses email/password and email recovery. SMS authentication is not enabled
+by this change; it requires the project's phone-auth/SMS provider and matching
+UI flow to be configured and tested.
+
 ## Flutter SDK version
 
 This project uses Flutter 3.50.0 stable with Dart 3.14.0, pinned in `.fvmrc`.
@@ -41,6 +75,7 @@ fvm flutter test
 
 GitHub Actions reads the same version from `.fvmrc` and runs the tests and web
 build for pushes and pull requests targeting `develop`.
+
 **Core Modules – Phase 1**
 
 1. **User Authentication & Profile Management:** Registration, login, password recovery, user profiles, and role management.

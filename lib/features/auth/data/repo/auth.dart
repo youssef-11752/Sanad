@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sanad/core/theme/colors.dart';
+import 'package:sanad/features/auth/data/model/user_role.dart';
 import 'package:sanad/features/auth/presentation/auth_strings.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -19,19 +20,25 @@ class Auth {
         password: password,
       );
       final user = response.user;
-      // user_metadata is used here for initial client-side routing. Production
-      // authorization must use trusted server-side role claims and RLS policies.
-      final assignedRole = _normalizeRole(
-        user?.appMetadata['role'] ?? user?.userMetadata?['role'],
-      );
+      if (user == null) {
+        _showMessage(context, strings.genericAuthError, isError: true);
+        return false;
+      }
+
+      // Resolve the account type from the existing public.users ->
+      // public.user_types relationship. Never authorize using user_metadata.
+      final assignedRole = await _assignedRole(user.id);
 
       if (assignedRole == null) {
-        await _client.auth.signOut();
+        await _rejectSession();
+        if (!context.mounted) return false;
         _showMessage(context, strings.accountRoleMissing, isError: true);
         return false;
       }
-      if (assignedRole != expectedRole) {
-        await _client.auth.signOut();
+
+      if (assignedRole != AuthRole.normalize(expectedRole)) {
+        await _rejectSession();
+        if (!context.mounted) return false;
         _showMessage(context, strings.wrongAccountRole, isError: true);
         return false;
       }
@@ -47,10 +54,27 @@ class Auth {
       _showMessage(context, error.message, isError: true);
       return false;
     } catch (_) {
+      await _rejectSession();
       if (!context.mounted) return false;
       _showMessage(context, strings.genericAuthError, isError: true);
       return false;
     }
+  }
+
+  Future<String?> _assignedRole(String userId) async {
+    final profile = await _client
+        .from('users')
+        .select('user_type_id, user_types!inner(name)')
+        .eq('id', userId)
+        .maybeSingle();
+
+    if (profile == null) return null;
+
+    final userType = profile['user_types'];
+    if (userType is Map) {
+      return AuthRole.normalize(userType['name']);
+    }
+    return null;
   }
 
   Future<bool> signup({
@@ -64,14 +88,23 @@ class Auth {
   }) async {
     final strings = AuthStrings.of(context);
     try {
+      final normalizedRole = AuthRole.normalize(role);
+      if (normalizedRole == null) {
+        _showMessage(context, strings.genericAuthError, isError: true);
+        return false;
+      }
+
       await _client.auth.signUp(
         email: email,
         password: password,
         data: {
+          'full_name': name,
           'name': name,
           'city': city,
           'region': area,
-          'role': role,
+          // The database trigger accepts only customer/provider role values
+          // and resolves the matching user_types.id on the server.
+          'role': normalizedRole,
         },
       );
       if (!context.mounted) return false;
@@ -150,15 +183,11 @@ class Auth {
 
   Future<void> signOut() => _client.auth.signOut();
 
-  String? _normalizeRole(Object? value) {
-    switch (value?.toString().toLowerCase()) {
-      case 'customer':
-      case 'client':
-        return 'customer';
-      case 'provider':
-        return 'provider';
-      default:
-        return null;
+  Future<void> _rejectSession() async {
+    try {
+      await _client.auth.signOut();
+    } catch (_) {
+      // Preserve the original authentication/role error.
     }
   }
 
