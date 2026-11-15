@@ -5,6 +5,7 @@ import 'package:sanad/features/auth/presentation/role_login_screen.dart';
 import 'package:sanad/features/auth/presentation/screens/splash_Screen.dart';
 import 'package:sanad/features/customer_management/client_home_provider.dart';
 import 'package:sanad/features/customer_management/screens/client_home_screen.dart';
+import 'package:sanad/features/onboarding/screens/onboarding_screen.dart';
 import 'package:sanad/features/provider_dashboard/screens/provider_dashboard_screen.dart';
 import 'package:sanad/features/service_categories/screens/service_categories_screen.dart';
 import 'package:sanad/features/type_selection/role_selection_screen.dart';
@@ -13,6 +14,10 @@ final GoRouter appRouter = GoRouter(
   initialLocation: '/splash',
   routes: [
     GoRoute(path: '/splash', builder: (context, state) => const SplashScreen()),
+    GoRoute(
+      path: '/onboarding',
+      builder: (context, state) => const OnboardingScreen(),
+    ),
     GoRoute(
       path: '/role-selection',
       builder: (context, state) => const RoleSelectionScreen(),
