@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
+import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/onboarding/models/onboarding_model.dart';
 
 class OnboardingPage extends StatelessWidget {
-  final OnboardingModel model;  // take model from model file 
+  final OnboardingModel model;
 
   const OnboardingPage({
     super.key,
@@ -12,79 +12,80 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            height: 220,
-            width: 220,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 224, 242, 241),
-              shape: BoxShape.circle,
+    return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.sizeOf(context).height * 0.42,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 220,
+              width: 220,
+              decoration: const BoxDecoration(
+                color: AppThemes.privacyColor,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                model.icon,
+                size: 100,
+                color: AppThemes.redColor,
+              ),
             ),
-            child: Icon(
-              model.icon,
-              size: 100,
-              color: const Color.fromARGB(255, 155, 31, 22),
-            ),
-          ),
-
-          SizedBox(height: 35),
-
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  width: 140,
-                  height: 26,
-                  decoration: BoxDecoration(
-                    color: Colors.teal[100],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
+            const SizedBox(height: 35),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Container(
+                    constraints: const BoxConstraints(maxWidth: 220),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppThemes.darkCremey,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Text(
-                      model.badge, // badge data from modl
-                       textAlign: TextAlign.right,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.teal[700],
+                      model.badge,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: AppThemes.darkGreen,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
                 ),
-              ),
-
-              SizedBox(height: 12),
-
-              Text(
-                model.title, // title from model
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.teal[700],
+                const SizedBox(height: 12),
+                Text(
+                  model.title,
+                  textAlign: TextAlign.start,
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: AppThemes.greenColor,
+                  ),
                 ),
-              ),
-
-              SizedBox(height: 15),
-
-              Text(
-                model.description, // descripton from model
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontSize: 16,
-                  height: 1.7,
-                  color: Colors.black54,
+                const SizedBox(height: 15),
+                Text(
+                  model.description,
+                  textAlign: TextAlign.start,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    height: 1.7,
+                    color: AppThemes.hiAccount,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
