@@ -101,6 +101,13 @@ class Auth {
         return false;
       }
 
+      // Provider accounts are pre-created by the Sanad admin with assigned
+      // credentials and provider data; only customers may self-register here.
+      if (normalizedRole != 'customer') {
+        _showMessage(context, strings.providerSignupManaged, isError: true);
+        return false;
+      }
+
       // The database trigger consumes this metadata and creates public.users.
       // The role is normalized before it reaches the trigger.
       final response = await _client.auth.signUp(
