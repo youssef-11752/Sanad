@@ -27,6 +27,7 @@ class _RoleLoginScreenState extends State<RoleLoginScreen> {
     super.dispose();
   }
 
+  // Reuse one login form while validating customer/provider roles separately.
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate() || _isSubmitting) return;
     setState(() => _isSubmitting = true);
@@ -39,6 +40,7 @@ class _RoleLoginScreenState extends State<RoleLoginScreen> {
     if (!mounted) return;
     setState(() => _isSubmitting = false);
     if (success) {
+      // Route to the destination that matches the verified database role.
       context.go(_isProvider ? '/provider/dashboard' : '/customer/management');
     }
   }
