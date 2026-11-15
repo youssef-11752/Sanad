@@ -37,7 +37,9 @@ void main() {
     );
 
     // Empty credentials must be rejected locally before Auth.login is called.
-    await tester.tap(find.text('Log in'));
+    final loginButton = find.text('Log in');
+    await tester.ensureVisible(loginButton);
+    await tester.tap(loginButton);
     await tester.pumpAndSettle();
 
     expect(find.text('This field is required'), findsNWidgets(2));
@@ -61,7 +63,9 @@ void main() {
     );
 
     // The submit action stays local until every required field is valid.
-    await tester.tap(find.text('Create account'));
+    final createButton = find.text('Create account');
+    await tester.ensureVisible(createButton);
+    await tester.tap(createButton);
     await tester.pumpAndSettle();
 
     expect(find.text('This field is required'), findsNWidgets(5));
