@@ -41,6 +41,9 @@ class AuthStrings {
       : 'I agree to the Privacy Policy and Terms of Service';
   String get create => isArabic ? 'إنشاء حساب' : 'Create account';
   String get haveAccount => isArabic ? 'عندك حساب؟' : 'Already have an account?';
+  String get providerSignupManaged => isArabic
+      ? 'حساب مقدم الخدمة بيتم تجهيزه من إدارة سند. استخدم بيانات الدخول اللي وصلتهالك.'
+      : 'Provider accounts are created by Sanad admin. Please use the credentials provided to you.';
   String get sendCode => isArabic ? 'إرسال رمز التحقق' : 'Send verification code';
   String get forgotTitle => isArabic ? 'نسيت كلمة المرور' : 'Forgot password';
   String get enterEmail => isArabic ? 'ادخل البريد الإلكتروني' : 'Enter your email';
