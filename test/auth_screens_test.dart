@@ -70,7 +70,9 @@ void main() {
     await tester.tap(createButton);
     await tester.pumpAndSettle();
 
-    expect(find.text('This field is required'), findsNWidgets(5));
+    // Four text fields are required; the password shows its own length rule.
+    expect(find.text('This field is required'), findsNWidgets(4));
+    expect(find.text('Password must be at least 8 characters'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }
