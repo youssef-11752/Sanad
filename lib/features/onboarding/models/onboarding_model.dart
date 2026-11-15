@@ -6,7 +6,7 @@ class OnboardingModel {
   final IconData icon;
   final String badge;
 
-  OnboardingModel({
+  const OnboardingModel({
     required this.title,
     required this.description,
     required this.icon,
