@@ -33,7 +33,7 @@ Widget _requestsApp(Locale locale, Future<List<RequestItem>> ordersFuture) {
 }
 
 void main() {
-  testWidgets('shows startup errors instead of a blank screen', (tester) async {
+  testWidgets('shows a dedicated startup error when Supabase setup is missing', (tester) async {
     final initialization = Completer<void>();
     await tester.pumpWidget(
       MyApp(
@@ -45,11 +45,10 @@ void main() {
     await tester.pump();
     await tester.pumpAndSettle();
 
-    expect(find.byType(MyRequestsScreen), findsOneWidget);
+    expect(find.byType(StartupErrorScreen), findsOneWidget);
     expect(find.textContaining('Missing Supabase setup'), findsOneWidget);
-    expect(find.text('Current requests'), findsOneWidget);
-    expect(find.text('No current orders.'), findsNothing);
     expect(find.text('Retry'), findsOneWidget);
+    expect(find.byType(MyRequestsScreen), findsNothing);
     expect(tester.takeException(), isNull);
   });
 
