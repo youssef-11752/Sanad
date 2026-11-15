@@ -103,7 +103,7 @@ class Auth {
 
       // The database trigger consumes this metadata and creates public.users.
       // The role is normalized before it reaches the trigger.
-      await _client.auth.signUp(
+      final response = await _client.auth.signUp(
         email: email,
         password: password,
         data: {
@@ -116,6 +116,15 @@ class Auth {
           'role': normalizedRole,
         },
       );
+
+      // A null user means Supabase did not create an account successfully.
+      // With email confirmation enabled, user is present even when session is null.
+      if (response.user == null) {
+        if (!context.mounted) return false;
+        _showMessage(context, strings.genericAuthError, isError: true);
+        return false;
+      }
+
       if (!context.mounted) return false;
       _showMessage(
         context,
