@@ -28,6 +28,12 @@ Widget _testApp() {
   return MaterialApp.router(routerConfig: router);
 }
 
+Future<void> _openFirstRunOnboarding(WidgetTester tester) async {
+  await tester.pumpWidget(_testApp());
+  await tester.pump(const Duration(milliseconds: 1800));
+  await tester.pumpAndSettle();
+}
+
 void main() {
   setUp(() {
     SharedPreferences.setMockInitialValues({});
@@ -74,11 +80,7 @@ void main() {
   testWidgets('shows exactly three onboarding pages and advances in order', (
     tester,
   ) async {
-    await tester.pumpWidget(_testApp());
-
-    // This test starts from Splash; complete the first-launch transition.
-    await tester.pump(const Duration(milliseconds: 1800));
-    await tester.pumpAndSettle();
+    await _openFirstRunOnboarding(tester);
 
     expect(find.text('كل صنعة لها سند'), findsOneWidget);
     expect(find.text('خطوة 1 من 3'), findsOneWidget);
@@ -98,12 +100,25 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('onboarding content remains scrollable on a small screen', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(320, 568);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await _openFirstRunOnboarding(tester);
+
+    expect(find.text('كل صنعة لها سند'), findsOneWidget);
+    expect(find.byType(SingleChildScrollView), findsWidgets);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('start now completes onboarding and opens role selection', (
     tester,
   ) async {
-    await tester.pumpWidget(_testApp());
-    await tester.pump(const Duration(milliseconds: 1800));
-    await tester.pumpAndSettle();
+    await _openFirstRunOnboarding(tester);
 
     await tester.tap(find.text('التالي'));
     await tester.pumpAndSettle();
@@ -120,9 +135,7 @@ void main() {
   testWidgets('skip completes onboarding and opens role selection', (
     tester,
   ) async {
-    await tester.pumpWidget(_testApp());
-    await tester.pump(const Duration(milliseconds: 1800));
-    await tester.pumpAndSettle();
+    await _openFirstRunOnboarding(tester);
 
     await tester.tap(find.text('تخطي'));
     await tester.pumpAndSettle();
