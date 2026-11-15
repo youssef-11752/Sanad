@@ -28,6 +28,9 @@ void main() {
     expect(find.byIcon(Icons.handyman_outlined), findsOneWidget);
     expect(find.text('Welcome back to Sanad'), findsOneWidget);
     expect(find.text('Log in'), findsOneWidget);
+    // Provider accounts are admin-provisioned, so this screen must not offer sign-up.
+    expect(find.text('First time here?'), findsNothing);
+    expect(find.text('Create a new account'), findsNothing);
     expect(tester.takeException(), isNull);
   });
 
@@ -46,14 +49,13 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('provider signup keeps the previously selected role', (tester) async {
+  testWidgets('customer login keeps the customer self-signup option', (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(home: SignupScreen(role: 'provider')),
+      const MaterialApp(home: RoleLoginScreen(role: 'customer')),
     );
 
-    expect(find.text('Service provider'), findsOneWidget);
-    expect(find.text('New account'), findsOneWidget);
-    expect(find.text('Create account'), findsOneWidget);
+    expect(find.text('First time here?'), findsOneWidget);
+    expect(find.text('Create a new account'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
