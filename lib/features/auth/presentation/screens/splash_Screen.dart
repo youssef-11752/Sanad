@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/auth/presentation/auth_strings.dart';
+import 'package:sanad/features/onboarding/screens/onboarding_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,8 +20,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigationTimer = Timer(const Duration(milliseconds: 1800), () {
-      if (mounted) context.go('/role-selection');
+    _navigationTimer = Timer(const Duration(milliseconds: 1800), () async {
+      var hasCompletedOnboarding = false;
+      try {
+        final preferences = await SharedPreferences.getInstance();
+        hasCompletedOnboarding =
+            preferences.getBool(OnboardingScreen.completedKey) ?? false;
+      } catch (_) {
+        // If local preferences cannot be read, show onboarding rather than skip it.
+      }
+
+      if (!mounted) return;
+      context.go(
+        hasCompletedOnboarding ? '/role-selection' : '/onboarding',
+      );
     });
   }
 
