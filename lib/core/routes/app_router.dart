@@ -32,9 +32,14 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: '/signup/:role',
-      builder: (context, state) => SignupScreen(
-        role: state.pathParameters['role'] == 'provider' ? 'provider' : 'customer',
-      ),
+      builder: (context, state) {
+        // Provider accounts are created by the Sanad admin, not self-registered.
+        final role = state.pathParameters['role'];
+        if (role == 'provider') {
+          return const RoleLoginScreen(role: 'provider');
+        }
+        return const SignupScreen(role: 'customer');
+      },
     ),
     GoRoute(
       path: '/forgot-password/:role',
