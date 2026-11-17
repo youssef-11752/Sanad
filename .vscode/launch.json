@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "sanad (Windows)",
+      "type": "dart",
+      "request": "launch",
+      "deviceId": "windows",
+      "args": [
+        "--dart-define-from-file=env.json"
+      ]
+    },
+    {
+      "name": "sanad (Edge)",
+      "type": "dart",
+      "request": "launch",
+      "deviceId": "edge",
+      "args": [
+        "--dart-define-from-file=env.json"
+      ]
+    }
+  ]
+}
