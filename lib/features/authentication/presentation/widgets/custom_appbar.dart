@@ -8,7 +8,7 @@ class CustomAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 40.h,
       width: 40.w,
       child: ClipRRect(

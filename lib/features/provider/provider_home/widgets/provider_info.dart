@@ -10,7 +10,7 @@ class Providerinfo extends StatelessWidget {
       width: double.infinity,
       height: 190,
 
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
 
       decoration: BoxDecoration(
         color: DarkTeal,
@@ -64,20 +64,24 @@ class Providerinfo extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Text(
-                        "متاح لاستقبال الطلبات",
-                        style: TextStyle(
-                          shadows: [
-                            Shadow(
-                              color: Boxshadowcolor,
-                              offset: Offset(5, 5),
-                              blurRadius: 5,
-                            ),
-                          ],
-                          color: DarkTeal,
-                          fontSize: 11,
-                          fontFamily: "Cairo",
-                          fontWeight: FontWeight.w700,
+                      Flexible(
+                        child: Text(
+                          "متاح لاستقبال الطلبات",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                color: Boxshadowcolor,
+                                offset: Offset(5, 5),
+                                blurRadius: 5,
+                              ),
+                            ],
+                            color: DarkTeal,
+                            fontSize: 11,
+                            fontFamily: "Cairo",
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ],
@@ -87,31 +91,36 @@ class Providerinfo extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 15),
+          const SizedBox(height: 10),
 
           Container(
             alignment: Alignment.centerRight,
 
-            child: Text(
-              "غسالات وثلاجات فقط",
-              textDirection: TextDirection.rtl,
-              style: TextStyle(
-                shadows: [
-                  Shadow(
-                    color: Boxshadowcolor,
-                    offset: Offset(5, 5),
-                    blurRadius: 5,
-                  ),
-                ],
-                fontSize: 25,
-                fontFamily: "Cairo",
-                fontWeight: FontWeight.w700,
-                color: Cream,
+            child: FittedBox(
+              alignment: Alignment.centerRight,
+              fit: BoxFit.scaleDown,
+              child: Text(
+                "غسالات وثلاجات فقط",
+                textDirection: TextDirection.rtl,
+                maxLines: 1,
+                style: TextStyle(
+                  shadows: [
+                    Shadow(
+                      color: Boxshadowcolor,
+                      offset: Offset(5, 5),
+                      blurRadius: 5,
+                    ),
+                  ],
+                  fontSize: 25,
+                  fontFamily: "Cairo",
+                  fontWeight: FontWeight.w700,
+                  color: Cream,
+                ),
               ),
             ),
           ),
 
-          SizedBox(height: 15),
+          SizedBox(height: 10),
 
           Container(
             alignment: Alignment.centerRight,
@@ -119,6 +128,8 @@ class Providerinfo extends StatelessWidget {
             child: Text(
               "الأجهزة المنزلية • مدينة نصر ومصر الجديدة",
               textDirection: TextDirection.rtl,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 12,
                 fontFamily: "Cairo",
@@ -128,7 +139,7 @@ class Providerinfo extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 15),
+          SizedBox(height: 8),
 
           Container(
             alignment: Alignment.centerRight,
@@ -136,6 +147,8 @@ class Providerinfo extends StatelessWidget {
             child: Text(
               "السبت–الخميس • ١٠ ص – ٨ م •",
               textDirection: TextDirection.rtl,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 12,
                 fontFamily: "Cairo",

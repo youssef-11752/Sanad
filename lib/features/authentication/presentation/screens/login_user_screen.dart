@@ -1,27 +1,25 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_button.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_appbar.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_appbarText.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_textFormField.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_textLabel.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_appbar_text.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_sentince.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_text_form_field.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_text_label.dart';
 import 'package:sanad/core/theme/colors.dart';
-import 'package:sanad/features/authentication/presentation/auth_strings.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginProvider extends StatefulWidget {
-  const LoginProvider({super.key});
+class LoginUserScreen extends StatefulWidget {
+  const LoginUserScreen({super.key});
 
   @override
-  State<LoginProvider> createState() => _LoginProviderState();
+  State<LoginUserScreen> createState() => _LoginUserScreenState();
 }
 
-class _LoginProviderState extends State<LoginProvider> {
+class _LoginUserScreenState extends State<LoginUserScreen> {
   final globKey = GlobalKey<FormState>();
-  final phoneController = TextEditingController();
-  final idController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -29,8 +27,6 @@ class _LoginProviderState extends State<LoginProvider> {
 
   @override
   void dispose() {
-    phoneController.dispose();
-    idController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -76,7 +72,7 @@ class _LoginProviderState extends State<LoginProvider> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 15.h),
+              SizedBox(height: 20.h),
               CustomAppbartext(text: AppLocalizations.of(context)!.loginTitle),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -85,34 +81,32 @@ class _LoginProviderState extends State<LoginProvider> {
                   style: TextStyle(color: AppThemes.hiAccount),
                 ),
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 50.h),
               Form(
                 key: globKey,
                 child: Padding(
                   padding: EdgeInsets.all(8.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    spacing: 2.h,
                     children: [
-                      SizedBox(height: 10.h),
                       CustomTextlabel(
                         text: AppLocalizations.of(context)!.email,
                       ),
-                      SizedBox(height: 8.h),
+                      SizedBox(height: 10.h),
                       CustomTextformfield(
                         validator: Validators.email,
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         bordercolor: AppThemes.redColor,
                         icon: Icons.email_outlined,
-                        text: 'example@gmail.com',
+                        text: AppLocalizations.of(context)!.hintEmail,
                         fillcolor: AppThemes.whiteColor,
                       ),
                       SizedBox(height: 10.h),
                       CustomTextlabel(
                         text: AppLocalizations.of(context)!.password,
                       ),
-                      SizedBox(height: 8.h),
+                      SizedBox(height: 10.h),
                       CustomTextformfield(
                         validator: Validators.loginPassword,
                         isPassword: true,
@@ -122,7 +116,6 @@ class _LoginProviderState extends State<LoginProvider> {
                         text: '••••••••',
                         fillcolor: AppThemes.whiteColor,
                       ),
-                      SizedBox(height: 10.h),
                     ],
                   ),
                 ),
@@ -141,7 +134,6 @@ class _LoginProviderState extends State<LoginProvider> {
                   ),
                 ),
               ),
-              SizedBox(height: 10.h),
               Padding(
                 padding: EdgeInsets.all(8.w),
                 child: GestureDetector(
@@ -152,7 +144,7 @@ class _LoginProviderState extends State<LoginProvider> {
                   ),
                 ),
               ),
-              SizedBox(height: 8.h),
+              SizedBox(height: 25.h),
               Padding(
                 padding: EdgeInsets.all(8.w),
                 child: Container(
@@ -182,13 +174,10 @@ class _LoginProviderState extends State<LoginProvider> {
                 ),
               ),
               SizedBox(height: 5.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.w),
-                child: Text(
-                  AuthStrings.of(context).providerSignupManaged,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: AppThemes.hiAccount, fontSize: 12.sp),
-                ),
+              CustomSentince(
+                onTap: () => context.go('/signUp'),
+                text1: AppLocalizations.of(context)!.firstTimeHere,
+                text2: AppLocalizations.of(context)!.createNewAccount,
               ),
               SizedBox(height: 15.h),
               Padding(

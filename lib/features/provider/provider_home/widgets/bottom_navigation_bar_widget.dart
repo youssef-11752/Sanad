@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sanad/core/constants/colors.dart';
 
 class BottomNavigationBarWidget extends StatelessWidget {
@@ -45,8 +46,8 @@ class BottomNavigationBarWidget extends StatelessWidget {
               icon: Icons.person_outline_rounded,
               label: "حسابي",
               isSelected: false,
+              onTap: () => context.go('/provider/profile'),
             ),
-            
           ],
         ),
       ),
@@ -58,12 +59,14 @@ class _BottomNavItem extends StatelessWidget {
   final IconData icon;
   final String label;
   final bool isSelected;
+  final VoidCallback? onTap;
   // final String? gifAsset;
 
   const _BottomNavItem({
     required this.icon,
     required this.label,
     required this.isSelected,
+    this.onTap,
     // this.gifAsset,
   });
 
@@ -75,40 +78,43 @@ class _BottomNavItem extends StatelessWidget {
 
     return Expanded(
       child: Center(
-        child: Container(
-          width: isSelected ? 86 : 70,
-          height: 52,
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(18),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // if (gifAsset case final asset?)
-                // Image.asset(asset, width: 23, height: 23, fit: BoxFit.contain)
-              // else
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(18),
+          child: Container(
+            width: isSelected ? 86 : 70,
+            height: 52,
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 Icon(icon, color: iconColor, size: 23),
-              SizedBox(height: 2),
-              Text(
-                label,
-                textDirection: TextDirection.rtl,
-                style: TextStyle(
-                  shadows: [
-                  Shadow(
-                    color: Boxshadowcolor,
-                    offset: Offset(5, 5),
-                    blurRadius: 5
-                  )
-                ],
-                  color: labelColor,
-                  fontSize: 11,
-                  fontFamily: "Cairo",
-                  fontWeight: FontWeight.w700,
+                SizedBox(height: 2),
+                Text(
+                  label,
+                  textDirection: TextDirection.rtl,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Boxshadowcolor,
+                        offset: Offset(5, 5),
+                        blurRadius: 5,
+                      ),
+                    ],
+                    color: labelColor,
+                    fontSize: 11,
+                    fontFamily: "Cairo",
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

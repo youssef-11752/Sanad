@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:sanad/core/routes/app_router.dart';
-import 'package:sanad/features/provider/provider_home/widgets/BottomNavigationBarWidget.dart';
+import 'package:sanad/features/provider/provider_home/widgets/bottom_navigation_bar_widget.dart';
 import 'package:sanad/features/provider/provider_home/screens/provider_home.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 
@@ -16,8 +16,8 @@ void main() {
     tester,
   ) async {
     // Fixed phone-sized window; reset after the test.
-    tester.view.physicalSize = const Size(390, 844);
-    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 3.0;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
@@ -45,7 +45,7 @@ void main() {
     expect(tester.takeException(), isNull);
 
     // Shrink the window to check the page still builds without errors.
-    tester.view.physicalSize = const Size(320, 568);
+    tester.view.physicalSize = const Size(960, 1704);
     await tester.pumpAndSettle();
 
     expect(find.byType(ProviderHomePage), findsOneWidget);
@@ -56,6 +56,11 @@ void main() {
   testWidgets('provider account tab opens the provider profile route', (
     tester,
   ) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     final router = GoRouter(
       initialLocation: '/provider/dashboard',
       routes: [

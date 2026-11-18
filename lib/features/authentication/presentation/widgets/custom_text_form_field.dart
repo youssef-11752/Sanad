@@ -100,8 +100,9 @@ class Validators {
     final v = value?.trim() ?? '';
     if (v.isEmpty) return 'Email is required';
     if (v.length > 254) return 'Email is too long';
-    if (!_emailRegex.hasMatch(v))
+    if (!_emailRegex.hasMatch(v)) {
       return 'Email must be valid and end with .com';
+    }
     return null;
   }
 

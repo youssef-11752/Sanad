@@ -1,5 +1,5 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:sanad/core/constants/Colors.dart';
+import 'package:sanad/core/constants/colors.dart';
 
 /// Central place for app colors and the light/dark ThemeData.
 abstract final class AppThemes {
@@ -14,7 +14,6 @@ abstract final class AppThemes {
   static const Color privacyColor = StoneWhite;
   static const Color hiAccount = DimGray;
   static const Color splashText = darkGreen;
-  static const Color SplashText = splashText;
 
   // Light theme: cream background, teal primary, rust as accent/error.
   static ThemeData get lightTheme => ThemeData(

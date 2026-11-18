@@ -10,11 +10,7 @@ class NotificationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPressed,
-      icon: Icon(
-        Icons.notifications_outlined,
-        size: 30,
-        color: Rust,
-      ),
+      icon: Icon(Icons.notifications_outlined, size: 30, color: Rust),
     );
   }
 }

@@ -1,25 +1,27 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_button.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_appbar.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_appbarText.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_sentince.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_textFormField.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_textLabel.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_appbar_text.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_text_form_field.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_text_label.dart';
 import 'package:sanad/core/theme/colors.dart';
+import 'package:sanad/features/authentication/presentation/auth_strings.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginUserScreen extends StatefulWidget {
-  const LoginUserScreen({super.key});
+class LoginProvider extends StatefulWidget {
+  const LoginProvider({super.key});
 
   @override
-  State<LoginUserScreen> createState() => _LoginUserScreenState();
+  State<LoginProvider> createState() => _LoginProviderState();
 }
 
-class _LoginUserScreenState extends State<LoginUserScreen> {
+class _LoginProviderState extends State<LoginProvider> {
   final globKey = GlobalKey<FormState>();
+  final phoneController = TextEditingController();
+  final idController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -27,6 +29,8 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
 
   @override
   void dispose() {
+    phoneController.dispose();
+    idController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -72,7 +76,7 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 20.h),
+              SizedBox(height: 15.h),
               CustomAppbartext(text: AppLocalizations.of(context)!.loginTitle),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -81,32 +85,34 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
                   style: TextStyle(color: AppThemes.hiAccount),
                 ),
               ),
-              SizedBox(height: 50.h),
+              SizedBox(height: 30.h),
               Form(
                 key: globKey,
                 child: Padding(
                   padding: EdgeInsets.all(8.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                    spacing: 2.h,
                     children: [
+                      SizedBox(height: 10.h),
                       CustomTextlabel(
                         text: AppLocalizations.of(context)!.email,
                       ),
-                      SizedBox(height: 10.h),
+                      SizedBox(height: 8.h),
                       CustomTextformfield(
                         validator: Validators.email,
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         bordercolor: AppThemes.redColor,
                         icon: Icons.email_outlined,
-                        text: AppLocalizations.of(context)!.hintEmail,
+                        text: 'example@gmail.com',
                         fillcolor: AppThemes.whiteColor,
                       ),
                       SizedBox(height: 10.h),
                       CustomTextlabel(
                         text: AppLocalizations.of(context)!.password,
                       ),
-                      SizedBox(height: 10.h),
+                      SizedBox(height: 8.h),
                       CustomTextformfield(
                         validator: Validators.loginPassword,
                         isPassword: true,
@@ -116,6 +122,7 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
                         text: '••••••••',
                         fillcolor: AppThemes.whiteColor,
                       ),
+                      SizedBox(height: 10.h),
                     ],
                   ),
                 ),
@@ -134,6 +141,7 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 10.h),
               Padding(
                 padding: EdgeInsets.all(8.w),
                 child: GestureDetector(
@@ -144,7 +152,7 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 25.h),
+              SizedBox(height: 8.h),
               Padding(
                 padding: EdgeInsets.all(8.w),
                 child: Container(
@@ -174,10 +182,13 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
                 ),
               ),
               SizedBox(height: 5.h),
-              CustomSentince(
-                onTap: () => context.go('/signUp'),
-                text1: AppLocalizations.of(context)!.firstTimeHere,
-                text2: AppLocalizations.of(context)!.createNewAccount,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: Text(
+                  AuthStrings.of(context).providerSignupManaged,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppThemes.hiAccount, fontSize: 12.sp),
+                ),
               ),
               SizedBox(height: 15.h),
               Padding(

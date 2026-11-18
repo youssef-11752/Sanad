@@ -1,7 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sanad/core/theme/colors.dart';
-import 'package:sanad/core/constants/Colors.dart' show Boxshadowcolor;
+import 'package:sanad/core/constants/colors.dart' show Boxshadowcolor;
 import 'package:sanad/features/client/client_services_categories/models/service_category.dart';
 
 // Colors used across the categories screen.

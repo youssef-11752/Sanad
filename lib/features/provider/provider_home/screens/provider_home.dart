@@ -1,10 +1,10 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:sanad/core/constants/colors.dart';
-import 'package:sanad/features/provider/provider_home/widgets/AppBarActions.dart';
-import 'package:sanad/features/provider/provider_home/widgets/BottomNavigationBarWidget.dart';
-import 'package:sanad/features/provider/provider_home/widgets/Dashboard.dart';
-import 'package:sanad/features/provider/provider_home/widgets/NotificationButton.dart';
-import 'package:sanad/features/provider/provider_home/widgets/ProviderInfo.dart';
+import 'package:sanad/features/provider/provider_home/widgets/app_bar_actions.dart';
+import 'package:sanad/features/provider/provider_home/widgets/bottom_navigation_bar_widget.dart';
+import 'package:sanad/features/provider/provider_home/widgets/dashboard.dart';
+import 'package:sanad/features/provider/provider_home/widgets/notification_button.dart';
+import 'package:sanad/features/provider/provider_home/widgets/provider_info.dart';
 
 class ProviderHomePage extends StatelessWidget {
   const ProviderHomePage({super.key});
@@ -42,27 +42,31 @@ class ProviderHomePage extends StatelessWidget {
                 SizedBox(height: 15),
 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   textDirection: TextDirection.rtl,
 
                   children: [
-                    Text(
-                      " ٠ طلبات مناسبة لصنعتك",
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(
-                        shadows: [
-                          Shadow(
-                            color: Boxshadowcolor,
-                            offset: Offset(5, 5),
-                            blurRadius: 5,
-                          ),
-                        ],
-                        fontSize: 19,
-                        fontFamily: "Cairo",
-                        fontWeight: FontWeight.w700,
-                        color: DimGray,
+                    Expanded(
+                      child: Text(
+                        " ٠ طلبات مناسبة لصنعتك",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                          shadows: [
+                            Shadow(
+                              color: Boxshadowcolor,
+                              offset: Offset(5, 5),
+                              blurRadius: 5,
+                            ),
+                          ],
+                          fontSize: 19,
+                          fontFamily: "Cairo",
+                          fontWeight: FontWeight.w700,
+                          color: DimGray,
+                        ),
                       ),
                     ),
+                    SizedBox(width: 8),
 
                     GestureDetector(
                       onTap: () {
@@ -111,12 +115,12 @@ class ProviderHomePage extends StatelessWidget {
 
                       SizedBox(width: 10),
 
-                      SizedBox(
-                        width: 250,
+                      Expanded(
                         child: Text(
                           "الطلبات هنا مطابقة لتخصصك والمنطقة والمواعيد . فعّلت غسالات وثلاجات فقط.",
                           textDirection: TextDirection.rtl,
                           maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 12,
                             fontFamily: "Cairo",
@@ -133,7 +137,7 @@ class ProviderHomePage extends StatelessWidget {
 
                 Container(
                   width: double.infinity,
-                  height: 278,
+                  constraints: const BoxConstraints(minHeight: 278),
 
                   padding: EdgeInsets.all(20),
 
@@ -151,6 +155,7 @@ class ProviderHomePage extends StatelessWidget {
 
                   child: Column(
                     textDirection: TextDirection.rtl,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Row(
                         textDirection: TextDirection.rtl,
@@ -368,7 +373,7 @@ class ProviderHomePage extends StatelessWidget {
 
                           style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(Rust),
-                            minimumSize: WidgetStatePropertyAll(Size(334, 65)),
+                            minimumSize: WidgetStatePropertyAll(Size(0, 60)),
                             shape: WidgetStatePropertyAll(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7),
@@ -403,7 +408,7 @@ class ProviderHomePage extends StatelessWidget {
 
                 Container(
                   width: double.infinity,
-                  height: 245,
+                  constraints: const BoxConstraints(minHeight: 245),
 
                   padding: EdgeInsets.all(20),
 
@@ -539,7 +544,7 @@ class ProviderHomePage extends StatelessWidget {
 
                           style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(Beige),
-                            minimumSize: WidgetStatePropertyAll(Size(334, 65)),
+                            minimumSize: WidgetStatePropertyAll(Size(0, 60)),
                             shape: WidgetStatePropertyAll(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7),
@@ -588,7 +593,6 @@ class ProviderHomePage extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-              
               ],
             ),
           ),

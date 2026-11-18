@@ -115,7 +115,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20.sp,
-                            color: AppThemes.SplashText,
+                            color: AppThemes.splashText,
                           ),
                         )
                         .animate(delay: 900.ms)

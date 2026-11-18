@@ -1,12 +1,12 @@
 import 'package:sanad/features/authentication/presentation/screens/finish_otp_screen.dart';
 import 'package:sanad/features/authentication/presentation/screens/forget_password.dart';
 import 'package:sanad/features/authentication/presentation/screens/home_screen.dart';
-import 'package:sanad/features/authentication/presentation/screens/login_Provider.dart';
-import 'package:sanad/features/authentication/presentation/screens/login_User_screen.dart';
-import 'package:sanad/features/authentication/presentation/screens/new_Password.dart';
+import 'package:sanad/features/authentication/presentation/screens/login_provider.dart';
+import 'package:sanad/features/authentication/presentation/screens/login_user_screen.dart';
+import 'package:sanad/features/authentication/presentation/screens/new_password.dart';
 import 'package:sanad/features/authentication/presentation/screens/otp_screen.dart';
-import 'package:sanad/features/authentication/presentation/screens/signUp_Screen.dart';
-import 'package:sanad/features/splash/splash_Screen.dart';
+import 'package:sanad/features/authentication/presentation/screens/sign_up_screen.dart';
+import 'package:sanad/features/splash/splash_screen.dart';
 import 'package:sanad/features/onboarding/screens/onboarding_screen.dart';
 import 'package:sanad/features/client/client_home/screens/client_home_screen.dart';
 import 'package:sanad/features/client/client_home/client_home_provider.dart';

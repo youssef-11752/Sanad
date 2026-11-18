@@ -8,7 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sanad/features/splash/splash_Screen.dart';
+import 'package:sanad/features/splash/splash_screen.dart';
 import 'package:sanad/features/onboarding/screens/onboarding_screen.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';

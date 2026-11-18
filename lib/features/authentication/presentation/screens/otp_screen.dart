@@ -1,10 +1,10 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_appbarText.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_textFormField.dart';
-import 'package:sanad/features/authentication/presentation/widgets/custom_textLabel.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_button.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_appbar_text.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_text_form_field.dart';
+import 'package:sanad/features/authentication/presentation/widgets/custom_text_label.dart';
 import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
