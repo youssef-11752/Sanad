@@ -1,17 +1,18 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/app_colors.dart';
 
 /// A tappable row for the settings list: icon, title and optional subtitle.
 class SettingsTile extends StatelessWidget {
-  final IconData icon;
+  final String iconAsset;
   final String title;
   final String? subtitle;
   final VoidCallback onTap;
 
   const SettingsTile({
     super.key,
-    required this.icon,
+    required this.iconAsset,
     required this.title,
     this.subtitle,
     required this.onTap,
@@ -53,10 +54,14 @@ class SettingsTile extends StatelessWidget {
     );
 
     // Small faded icon shown on the leading side of the row.
-    final tileIcon = Icon(
-      icon,
-      size: 16,
-      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.65),
+    final tileIcon = SvgPicture.asset(
+      iconAsset,
+      width: 16,
+      height: 16,
+      colorFilter: ColorFilter.mode(
+        Theme.of(context).colorScheme.primary.withValues(alpha: 0.65),
+        BlendMode.srcIn,
+      ),
     );
 
     // Material + InkWell gives the rounded border and a ripple on tap.

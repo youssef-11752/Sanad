@@ -1,21 +1,13 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_sentince.dart';
+import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-/// Last step of the password reset: confirms success and sends the user
-/// back to the login screen for their role.
 class FinishOtpScreen extends StatelessWidget {
-  const FinishOtpScreen({this.role = 'customer', super.key});
-
-  final String role;
-
-  // Provider and customer have separate login routes.
-  String get _loginRoute =>
-      role == 'provider' ? '/login/provider' : '/login/customer';
+  const FinishOtpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +19,7 @@ class FinishOtpScreen extends StatelessWidget {
           children: [
             CustomSentince(
               onTap: () {
-                context.go(_loginRoute);
+                context.go('/loginUser');
               },
               text1: AppLocalizations.of(context)!.passwordResetSuccessPrefix,
               text2: AppLocalizations.of(context)!.loginButton,
@@ -36,7 +28,7 @@ class FinishOtpScreen extends StatelessWidget {
 
             GestureDetector(
               onTap: () {
-                context.go(_loginRoute);
+                context.go('/loginUser');
               },
               child: Padding(
                 padding: EdgeInsets.all(8.w),

@@ -9,7 +9,7 @@ import 'package:sanad/features/onboarding/widgets/onboarding_indicator.dart';
 import 'package:sanad/features/onboarding/widgets/onboarding_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Intro slides shown on first launch. Finishing or skipping goes to role selection.
+/// Intro slides shown on first launch. Finishing or skipping goes to customer login.
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -29,29 +29,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final List<OnboardingModel> _onboardingPages = [
     OnboardingModel(
       title: 'كل صنعة لها سند',
-      description:
-          'من غسالتك لكهرباء بيتك، ومن النجارة لصيانة مركبتك، اطلب الخدمة المناسبة من مكان واحد.',
+      description: 'من غسالتك لكهرباء بيتك، ومن النجارة لصيانة مركبتك، اطلب الخدمة المناسبة من مكان واحد.',
       icon: Icons.home_repair_service_outlined,
       badge: 'سند · لكل بيت صنعة',
     ),
     OnboardingModel(
       title: 'أهل خبرة قريبين منك',
-      description:
-          'اختار متخصص موثوق حسب نوع العطل، وشوف خبرته وتقييماته ورسوم الزيارة قبل ما تحجز.',
+      description: 'اختار متخصص موثوق حسب نوع العطل، وشوف خبرته وتقييماته ورسوم الزيارة قبل ما تحجز.',
       icon: Icons.engineering_outlined,
       badge: 'سند · لكل بيت صنعة',
     ),
     OnboardingModel(
       title: 'سند معاك لحد ما الشغل يخلص',
-      description:
-          'احكي المشكلة، حدد الزيارة، وتابع طلبك خطوة بخطوة. سند معاك لحد ما الشغل يخلص.',
+      description: 'احكي المشكلة، حدد الزيارة، وتابع طلبك خطوة بخطوة. سند معاك لحد ما الشغل يخلص.',
       icon: Icons.assignment_outlined,
       badge: 'سند · لكل بيت صنعة',
     ),
   ];
 
-  /// Saves the "completed" flag and moves on to role selection.
-/// The guard stops double taps from running it twice.
+  /// Saves the "completed" flag and moves on to customer login.
+  /// The guard stops double taps from running it twice.
   Future<void> _completeOnboarding() async {
     if (_isCompleting) return;
     setState(() => _isCompleting = true);
@@ -61,12 +58,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       await preferences.setBool(OnboardingScreen.completedKey, true);
     } catch (_) {
       // the flag is a convenience only, so a storage failure must not block the user
-      // Continue to role selection even if local persistence is unavailable.
+      // Continue to login even if local persistence is unavailable.
     }
 
     // the widget may have been disposed while waiting for storage
     if (!mounted) return;
-    context.go('/role-selection');
+    context.go('/login/customer');
   }
 
   // slides to the next page, or finishes when already on the last one

@@ -1,19 +1,49 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:sanad/core/widgets/custom_SnakBar.dart';
-import 'package:sanad/features/authentication/data/model/user_role.dart';
-import 'package:sanad/features/authentication/presentation/auth_strings.dart';
+import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-/// Thin wrapper around Supabase auth. Each method shows its own error snackbar
-/// and returns true/false so screens only need to react to the result.
 class Auth {
   final supa = Supabase.instance.client.auth;
 
   Future<void> signOut() => supa.signOut();
 
-  Future<String?> currentUserRole() => _currentUserRole();
+  Future<String?> currentUserRole() async {
+    final user = supa.currentUser;
+    if (user == null) return null;
 
-  /// Signs in, and optionally checks the account really has [expectedRole].
+    final profile = await Supabase.instance.client
+        .from('users')
+        .select('user_type_id')
+        .eq('id', user.id)
+        .maybeSingle();
+    final userTypeId = profile?['user_type_id'];
+    if (userTypeId is! num) return null;
+
+    final userType = await Supabase.instance.client
+        .from('user_types')
+        .select('name')
+        .eq('id', userTypeId)
+        .maybeSingle();
+    final name = userType?['name']?.toString().trim().toLowerCase();
+    if (name == null) return null;
+    if (name == 'customer' ||
+        name == 'client' ||
+        name == 'محتاج خدمة' ||
+        name == 'محتاج خدمه' ||
+        name == 'عميل') {
+      return 'customer';
+    }
+    if (name == 'provider' ||
+        name == 'service provider' ||
+        name == 'مقدم الخدمة' ||
+        name == 'مقدم خدمه') {
+      return 'provider';
+    }
+    return null;
+  }
+
+  // Login
   Future<bool> login({
     required String email,
     required String password,
@@ -22,82 +52,36 @@ class Auth {
   }) async {
     try {
       await supa.signInWithPassword(email: email, password: password);
-      // The widget may be gone after an await, so check `mounted` before using context.
+      if (!context.mounted) return false;
+      return true;
+    } on AuthException catch (e) {
       if (!context.mounted) return false;
 
-      // A customer must not log in through the provider screen (and vice versa),
-      // so sign out again if the stored role does not match.
-      if (expectedRole != null) {
-        final actualRole = await _currentUserRole();
-        if (!context.mounted) return false;
-        if (actualRole == null) {
-          await supa.signOut();
-          if (!context.mounted) return false;
-          customSnakbar(
-            context,
-            AuthStrings.of(context).accountRoleMissing,
-            Colors.red,
-          );
-          return false;
-        }
-        if (actualRole != AuthRole.normalize(expectedRole)) {
-          await supa.signOut();
-          if (!context.mounted) return false;
-          customSnakbar(
-            context,
-            AuthStrings.of(context).wrongAccountRole,
-            Colors.red,
-          );
-          return false;
-        }
+      String message;
+      if (e.code == 'invalid_credentials' ||
+          e.message.toLowerCase().contains('invalid login credentials')) {
+        message = 'Incorrect email or password.';
+      } else if (e.code == 'email_not_confirmed' ||
+          e.message.toLowerCase().contains('email not confirmed')) {
+        message = 'Please confirm your email first. Check your inbox.';
+      } else {
+        message = 'Login failed. Please try again.';
       }
 
-      return true;
-      // Map known Supabase error codes to localized messages.
-    } on AuthException catch (error) {
-      if (!context.mounted) return false;
-      final strings = AuthStrings.of(context);
-      final message = switch (error.code) {
-        'invalid_credentials' => strings.incorrectCredentials,
-        'email_not_confirmed' => strings.emailNotConfirmed,
-        _ => error.message,
-      };
       customSnakbar(context, message, Colors.red);
       return false;
-    } catch (error) {
+    } catch (e) {
       if (!context.mounted) return false;
       customSnakbar(
         context,
-        AuthStrings.of(context).genericAuthError,
+        'Login failed. Please check your connection and try again.',
         Colors.red,
       );
       return false;
     }
   }
 
-  // Looks up the role in two steps: users.user_type_id, then user_types.name.
-  Future<String?> _currentUserRole() async {
-    final user = supa.currentUser;
-    if (user == null) return null;
-
-    final client = Supabase.instance.client;
-    final profile = await client
-        .from('users')
-        .select('user_type_id')
-        .eq('id', user.id)
-        .maybeSingle();
-    final userTypeId = profile?['user_type_id'];
-    if (userTypeId is! num) return null;
-
-    final userType = await client
-        .from('user_types')
-        .select('name')
-        .eq('id', userTypeId)
-        .maybeSingle();
-    return AuthRole.normalize(userType?['name']);
-  }
-
-  /// Creates a customer account. Providers cannot register from the app.
+  // SignUp
   Future<bool> signup({
     required String name,
     required String email,
@@ -107,15 +91,8 @@ class Auth {
     required BuildContext context,
     String role = 'customer',
   }) async {
-    final strings = AuthStrings.of(context);
-    if (AuthRole.normalize(role) != 'customer') {
-      customSnakbar(context, strings.wrongAccountRole, Colors.red);
-      return false;
-    }
-
-    // Extra profile fields go into user metadata.
     try {
-      final response = await supa.signUp(
+      final res = await supa.signUp(
         password: password,
         email: email,
         data: {
@@ -126,25 +103,37 @@ class Auth {
           'role': 'customer',
         },
       );
+
       if (!context.mounted) return false;
 
-      // Supabase returns a user with no identities when the email is already
-      // registered (to avoid leaking account existence), so detect that case.
-      if (response.user != null &&
-          (response.user!.identities?.isEmpty ?? false)) {
-        customSnakbar(context, strings.emailAlreadyRegistered, Colors.red);
+      // إيميل متسجل قبل كده
+      if (res.user != null && (res.user!.identities?.isEmpty ?? false)) {
+        customSnakbar(
+          context,
+          'This email is already registered. Try logging in instead.',
+          Colors.red,
+        );
         return false;
       }
 
-      customSnakbar(context, strings.accountCreatedCheckEmail, Colors.green);
+      customSnakbar(
+        context,
+        'Account created. Please check your email to confirm it.',
+        Colors.green,
+      );
+
       return true;
-    } on AuthException catch (error) {
+    } on AuthException catch (e) {
       if (!context.mounted) return false;
-      customSnakbar(context, error.message, Colors.red);
+      customSnakbar(context, e.message, Colors.red);
       return false;
-    } catch (error) {
+    } catch (e) {
       if (!context.mounted) return false;
-      customSnakbar(context, strings.genericAuthError, Colors.red);
+      customSnakbar(
+        context,
+        'Sign up failed. Please check your connection and try again.',
+        Colors.red,
+      );
       return false;
     }
   }
@@ -155,30 +144,34 @@ class Auth {
       await supa.resetPasswordForEmail(email);
       if (!context.mounted) return false;
 
-      customSnakbar(context, AuthStrings.of(context).otpSent, Colors.green);
+      customSnakbar(context, 'We sent a code to your email', Colors.green);
+
       return true;
     } on AuthException catch (e) {
       if (!context.mounted) return false;
 
       customSnakbar(context, e.message, Colors.red);
+
       return false;
     } catch (e) {
       if (!context.mounted) return false;
 
       customSnakbar(
         context,
-        AuthStrings.of(context).genericAuthError,
+        'Could not send the code. Please check your connection and try again.',
         Colors.red,
       );
+
       return false;
     }
   }
 
-  // Verifies the recovery code that was emailed to the user.
+  // verifyOtp
   Future<bool> verifyOtp(String email, String otp, BuildContext context) async {
     try {
       await supa.verifyOTP(email: email, token: otp, type: OtpType.recovery);
       if (!context.mounted) return false;
+      context.go('/newPassword');
       return true;
     } on AuthException catch (e) {
       if (!context.mounted) return false;
@@ -188,24 +181,21 @@ class Auth {
       if (!context.mounted) return false;
       customSnakbar(
         context,
-        AuthStrings.of(context).genericAuthError,
+        'Could not verify the code. Please check your connection and try again.',
         Colors.red,
       );
       return false;
     }
   }
 
-  // Sets the new password, then signs out so the user logs in again with it.
-  Future<bool> resetPassword(String newPassword, BuildContext context) async {
+  // Reset Password
+  Future<bool> resetPassword(String newpass, BuildContext context) async {
     try {
-      await supa.updateUser(UserAttributes(password: newPassword));
+      await supa.updateUser(UserAttributes(password: newpass));
       await supa.signOut();
       if (!context.mounted) return false;
-      customSnakbar(
-        context,
-        AuthStrings.of(context).passwordUpdated,
-        Colors.green,
-      );
+      customSnakbar(context, 'Password updated successfully', Colors.green);
+      context.go('/finishOtp');
       return true;
     } on AuthException catch (e) {
       if (!context.mounted) return false;
@@ -215,7 +205,7 @@ class Auth {
       if (!context.mounted) return false;
       customSnakbar(
         context,
-        AuthStrings.of(context).genericAuthError,
+        'Could not update your password. Please check your connection and try again.',
         Colors.red,
       );
       return false;

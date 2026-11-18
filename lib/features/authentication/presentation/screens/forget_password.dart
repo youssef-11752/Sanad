@@ -1,19 +1,16 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_appbarText.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textFormField.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textLabel.dart';
+import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-/// Asks for the account email and sends a reset code (step 1 of password recovery).
 class ForgetPassword extends StatefulWidget {
-  const ForgetPassword({this.role = 'customer', super.key});
-
-  final String role;
+  const ForgetPassword({super.key});
 
   @override
   State<ForgetPassword> createState() => _ForgetPasswordState();
@@ -31,7 +28,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     super.dispose();
   }
 
-  // Ignore taps while a request is running, validate, then send the code.
   Future<void> _sendOtp() async {
     if (isLoading) return;
     if (!globKey.currentState!.validate()) return;
@@ -42,8 +38,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     if (!mounted) return;
     setState(() => isLoading = false);
 
-    // Pass the email to the OTP screen so it knows what to verify.
-    if (ok) context.push('/otpScreen/${widget.role}', extra: email);
+    if (ok) context.push('/otpScreen', extra: email);
   }
 
   @override
@@ -58,8 +53,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             text: AppLocalizations.of(context)!.forgotPasswordTitle,
           ),
         ),
-        // LayoutBuilder + minHeight lets the content center on tall screens but
-        // still scroll on small ones.
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(

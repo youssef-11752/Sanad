@@ -1,18 +1,16 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
-import 'package:sanad/features/authentication/presentation/auth_strings.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_appbar.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_appbarText.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textFormField.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textLabel.dart';
+import 'package:sanad/core/theme/colors.dart';
+import 'package:sanad/features/authentication/presentation/auth_strings.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-/// Login screen for service providers. There is no signup link because
-/// provider accounts are created by the admin.
 class LoginProvider extends StatefulWidget {
   const LoginProvider({super.key});
 
@@ -38,7 +36,6 @@ class _LoginProviderState extends State<LoginProvider> {
     super.dispose();
   }
 
-  // expectedRole makes Auth reject accounts that are not providers.
   Future<void> _login() async {
     if (isLoading) return;
     if (!globKey.currentState!.validate()) return;
@@ -47,14 +44,18 @@ class _LoginProviderState extends State<LoginProvider> {
     final ok = await Auth().login(
       email: emailController.text.trim(),
       password: passwordController.text,
-      expectedRole: 'provider',
       context: context,
     );
     if (!mounted) return;
     setState(() => isLoading = false);
 
-    // Verified provider: go to the dashboard.
-    if (ok) context.go('/provider/dashboard');
+    if (ok) {
+      final role = await Auth().currentUserRole();
+      if (!mounted) return;
+      context.go(
+        role == 'provider' ? '/provider/dashboard' : '/customer/management',
+      );
+    }
   }
 
   @override
@@ -65,7 +66,7 @@ class _LoginProviderState extends State<LoginProvider> {
           backgroundColor: AppThemes.cremeyColor,
           title: Row(
             children: [
-              const CustomAppbar(),
+              CustomAppbar(image: 'assets/icons/Sanad house · Soft rise.png'),
               CustomAppbartext(text: AppLocalizations.of(context)!.appName),
             ],
           ),
@@ -127,7 +128,7 @@ class _LoginProviderState extends State<LoginProvider> {
                 ),
               ),
               GestureDetector(
-                onTap: () => context.push('/forgot-password/provider'),
+                onTap: () => context.push('/forgetPassword'),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: Text(
@@ -152,7 +153,6 @@ class _LoginProviderState extends State<LoginProvider> {
                 ),
               ),
               SizedBox(height: 8.h),
-              // Small notice box explaining how the user's data is protected.
               Padding(
                 padding: EdgeInsets.all(8.w),
                 child: Container(
@@ -167,14 +167,10 @@ class _LoginProviderState extends State<LoginProvider> {
                     spacing: 2.h,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(
+                      Image.asset(
+                        'assets/icons/shield-check.png',
                         height: 25.h,
                         width: 25.w,
-                        child: Icon(
-                          Icons.shield_outlined,
-                          color: AppThemes.greenColor,
-                          size: 22.sp,
-                        ),
                       ),
                       Expanded(
                         child: CustomTextlabel(

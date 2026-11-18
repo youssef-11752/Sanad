@@ -1,9 +1,9 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sanad/features/auth/presentation/role_login_screen.dart';
-import 'package:sanad/features/auth/presentation/screens/login_Provider.dart';
-import 'package:sanad/features/auth/presentation/auth_flow_screens.dart';
+import 'package:sanad/features/authentication/presentation/role_login_screen.dart';
+import 'package:sanad/features/authentication/presentation/screens/login_Provider.dart';
+import 'package:sanad/features/authentication/presentation/auth_flow_screens.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 
 void main() {

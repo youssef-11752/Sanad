@@ -1,5 +1,4 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_appbar.dart';
@@ -7,12 +6,11 @@ import 'package:sanad/features/authentication/presentation/widgets/custom_appbar
 import 'package:sanad/features/authentication/presentation/widgets/custom_sentince.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textFormField.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textLabel.dart';
+import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-/// Login screen for customers. Uses the shared custom form widgets and
-/// localized strings; customers can also jump to signup from here.
 class LoginUserScreen extends StatefulWidget {
   const LoginUserScreen({super.key});
 
@@ -34,7 +32,6 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
     super.dispose();
   }
 
-  // Validate, log in, and only accept accounts whose role is customer.
   Future<void> _login() async {
     if (isLoading) return;
     if (!globKey.currentState!.validate()) return;
@@ -43,14 +40,18 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
     final ok = await Auth().login(
       email: emailController.text.trim(),
       password: passwordController.text,
-      expectedRole: 'customer',
       context: context,
     );
     if (!mounted) return;
     setState(() => isLoading = false);
 
-    // Customers land on their management (home) screen.
-    if (ok) context.go('/customer/management');
+    if (ok) {
+      final role = await Auth().currentUserRole();
+      if (!mounted) return;
+      context.go(
+        role == 'provider' ? '/provider/dashboard' : '/customer/management',
+      );
+    }
   }
 
   @override
@@ -61,7 +62,7 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
           backgroundColor: AppThemes.cremeyColor,
           title: Row(
             children: [
-              const CustomAppbar(),
+              CustomAppbar(image: 'assets/icons/Sanad house · Soft rise.png'),
               CustomAppbartext(text: AppLocalizations.of(context)!.appName),
             ],
           ),
@@ -120,7 +121,7 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
                 ),
               ),
               GestureDetector(
-                onTap: () => context.push('/forgot-password/customer'),
+                onTap: () => context.push('/forgetPassword'),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: Text(
@@ -144,7 +145,6 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
                 ),
               ),
               SizedBox(height: 25.h),
-              // Info box about data privacy, same as on the provider login screen.
               Padding(
                 padding: EdgeInsets.all(8.w),
                 child: Container(
@@ -159,14 +159,10 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
                     spacing: 2.h,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(
+                      Image.asset(
+                        'assets/icons/shield-check.png',
                         height: 25.h,
                         width: 25.w,
-                        child: Icon(
-                          Icons.shield_outlined,
-                          color: AppThemes.greenColor,
-                          size: 22.sp,
-                        ),
                       ),
                       Expanded(
                         child: CustomTextlabel(
@@ -179,7 +175,7 @@ class _LoginUserScreenState extends State<LoginUserScreen> {
               ),
               SizedBox(height: 5.h),
               CustomSentince(
-                onTap: () => context.go('/signup/customer'),
+                onTap: () => context.go('/signUp'),
                 text1: AppLocalizations.of(context)!.firstTimeHere,
                 text2: AppLocalizations.of(context)!.createNewAccount,
               ),

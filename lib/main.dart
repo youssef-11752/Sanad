@@ -1,15 +1,10 @@
-import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/widgets.dart' as widgets;
-import 'package:flutter_localizations/flutter_localizations.dart'
-    show GlobalWidgetsLocalizations;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:sanad/core/app_preferences.dart';
 import 'package:sanad/core/routes/app_router.dart';
 import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/authentication/presentation/auth_strings.dart';
-import 'package:sanad/features/type_selection/type_provider.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -48,8 +43,7 @@ class _MyAppState extends State<MyApp> {
     );
     const supabasePublishableKey = String.fromEnvironment(
       'SUPABASE_PUBLISHABLE_KEY',
-      defaultValue:
-          'sb_publishable_r3XiLkp2Ny-9pay-MbEtBg_1mY4Z1TT',
+      defaultValue: 'sb_publishable_r3XiLkp2Ny-9pay-MbEtBg_1mY4Z1TT',
     );
     // Fail early with a clear message when the config is missing.
     if (supabaseUrl.isEmpty || supabasePublishableKey.isEmpty) {
@@ -92,9 +86,7 @@ class _MyAppState extends State<MyApp> {
                   supportedLocales: AppLocalizations.supportedLocales,
                   localizationsDelegates: const [
                     AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
+                    ...GlobalMaterialLocalizations.delegates,
                   ],
                   theme: AppThemes.lightTheme,
                   darkTheme: AppThemes.darkTheme,
@@ -106,7 +98,7 @@ class _MyAppState extends State<MyApp> {
                   },
                   // All navigation is handled by the shared go_router config.
                   routerConfig: appRouter,
-                  // Wrap every page: show loading/error until Supabase is ready, then provide the role selection state.
+                  // Wrap every page: show loading/error until Supabase is ready.
                   builder: (context, child) {
                     return FutureBuilder<void>(
                       future: _supabaseInitialization,
@@ -120,10 +112,7 @@ class _MyAppState extends State<MyApp> {
                             onRetry: _retryInitialization,
                           );
                         }
-                        return ChangeNotifierProvider(
-                          create: (_) => RoleSelectionProvider(),
-                          child: child ?? const SizedBox.shrink(),
-                        );
+                        return child ?? const SizedBox.shrink();
                       },
                     );
                   },

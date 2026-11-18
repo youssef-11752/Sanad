@@ -5,12 +5,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
-import 'package:sanad/features/customer_management/client_home_provider.dart';
-import 'package:sanad/features/customer_management/screens/client_home_screen.dart';
-import 'package:sanad/features/customer_management/service_address.dart';
-import 'package:sanad/features/request_status/models/request_item.dart';
-import 'package:sanad/features/request_status/screens/my_requests_screen.dart';
-import 'package:sanad/features/service_categories/screens/service_categories_screen.dart';
+import 'package:sanad/features/client/client_home/client_home_provider.dart';
+import 'package:sanad/features/client/client_home/screens/client_home_screen.dart';
+import 'package:sanad/features/client/client_home/service_address.dart';
+import 'package:sanad/features/client/client_requests/models/request_item.dart';
+import 'package:sanad/features/client/client_requests/screens/my_requests_screen.dart';
+import 'package:sanad/features/client/client_services_categories/screens/service_categories_screen.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 
 // Placeholder page used as a stand-in for routes we only need to land on.

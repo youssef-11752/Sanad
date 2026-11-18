@@ -1,19 +1,15 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_appbarText.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textFormField.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textLabel.dart';
+import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
-/// Lets the user pick a new password after the OTP was verified.
 class NewPassword extends StatefulWidget {
-  const NewPassword({this.role = 'customer', super.key});
-
-  final String role;
+  const NewPassword({super.key});
 
   @override
   State<NewPassword> createState() => _NewPasswordState();
@@ -31,16 +27,14 @@ class _NewPasswordState extends State<NewPassword> {
     super.dispose();
   }
 
-  // On success, go to the "all done" screen; the user is signed out by then.
   Future<void> _reset() async {
     if (isLoading) return;
     if (!globKey.currentState!.validate()) return;
 
     setState(() => isLoading = true);
-    final success = await Auth().resetPassword(passController.text, context);
+    await Auth().resetPassword(passController.text, context);
     if (!mounted) return;
     setState(() => isLoading = false);
-    if (success) context.go('/finishOtp/${widget.role}');
   }
 
   @override
@@ -55,7 +49,6 @@ class _NewPasswordState extends State<NewPassword> {
             text: AppLocalizations.of(context)!.newPasswordTitle,
           ),
         ),
-        // Same centered-but-scrollable layout trick as the forgot password screen.
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(

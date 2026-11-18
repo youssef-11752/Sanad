@@ -12,37 +12,37 @@ class ClientHomeProvider extends ChangeNotifier {
       id: '1',
       title: 'النقاشة',
       category: HomeServiceCategory.painting,
-      icon: Icons.format_paint_outlined,
+      iconAsset: 'assets/icons/paint-roller.svg',
     ),
     ServiceModel(
       id: '2',
       title: 'صيانة الأجهزة المنزلية',
       category: HomeServiceCategory.appliances,
-      icon: Icons.home_repair_service_outlined,
+      iconAsset: 'assets/icons/washing-machine.svg',
     ),
     ServiceModel(
       id: '3',
       title: 'السباكة',
       category: HomeServiceCategory.plumbing,
-      icon: Icons.plumbing_outlined,
+      iconAsset: 'assets/icons/heater.svg',
     ),
     ServiceModel(
       id: '4',
       title: 'النجارة',
       category: HomeServiceCategory.carpentry,
-      icon: Icons.handyman_outlined,
+      iconAsset: 'assets/icons/hammer.svg',
     ),
     ServiceModel(
       id: '5',
       title: 'الكهرباء',
       category: HomeServiceCategory.electrical,
-      icon: Icons.electrical_services_outlined,
+      iconAsset: 'assets/icons/plug-zap.svg',
     ),
     ServiceModel(
       id: '6',
       title: 'صيانة المكيفات',
       category: HomeServiceCategory.airConditioning,
-      icon: Icons.ac_unit,
+      iconAsset: 'assets/icons/snowflake.svg',
     ),
   ];
 

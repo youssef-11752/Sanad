@@ -46,32 +46,32 @@ class _ServiceCategoriesScreenState extends State<ServiceCategoriesScreen> {
       ServiceCategory(
         title: localizations.applianceCategory,
         description: localizations.applianceCategoryDescription,
-        icon: Icons.local_laundry_service_outlined,
+        iconAsset: 'assets/icons/washing-machine.svg',
       ),
       ServiceCategory(
         title: localizations.paintingCategory,
         description: localizations.paintingCategoryDescription,
-        icon: Icons.format_paint_outlined,
+        iconAsset: 'assets/icons/paint-roller.svg',
       ),
       ServiceCategory(
         title: localizations.carpentryCategory,
         description: localizations.carpentryCategoryDescription,
-        icon: Icons.handyman_outlined,
+        iconAsset: 'assets/icons/hammer.svg',
       ),
       ServiceCategory(
         title: localizations.electricalCategory,
         description: localizations.electricalCategoryDescription,
-        icon: Icons.electrical_services_outlined,
+        iconAsset: 'assets/icons/plug-zap.svg',
       ),
       ServiceCategory(
         title: localizations.airConditioningCategory,
         description: localizations.airConditioningCategoryDescription,
-        icon: Icons.ac_unit,
+        iconAsset: 'assets/icons/snowflake.svg',
       ),
       ServiceCategory(
         title: localizations.plumbingCategory,
         description: localizations.plumbingCategoryDescription,
-        icon: Icons.plumbing_outlined,
+        iconAsset: 'assets/icons/heater.svg',
       ),
     ];
     // Case-insensitive filter on title or description.

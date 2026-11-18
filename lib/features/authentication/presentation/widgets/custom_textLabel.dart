@@ -1,8 +1,7 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sanad/core/theme/colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// Small bold green label displayed above a form field.
 class CustomTextlabel extends StatelessWidget {
   const CustomTextlabel({super.key, required this.text});
 

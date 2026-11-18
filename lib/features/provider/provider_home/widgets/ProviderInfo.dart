@@ -30,61 +30,58 @@ class Providerinfo extends StatelessWidget {
             children: [
               Icon(Icons.home_filled, color: Champagane, size: 35),
 
-              Container(
-                width: 141,
-                height: 24,
-
-                decoration: BoxDecoration(
-                  color: StoneWhite,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Boxshadowcolor,
-                      offset: Offset(5, 5),
-                      blurRadius: 3,
-                    ),
-                  ],
-                ),
-
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  textDirection: TextDirection.rtl,
-
-                  children: [
-                    Text(
-                      " ●",
-                      style: TextStyle(
-                        color: Rust,
-                        fontSize: 11,
-                        shadows: [
-                          Shadow(
-                            color: Boxshadowcolor,
-                            offset: Offset(5, 5),
-                            blurRadius: 5,
-                          ),
-                        ],
+              Flexible(
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 141),
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: StoneWhite,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Boxshadowcolor,
+                        offset: Offset(5, 5),
+                        blurRadius: 3,
                       ),
-                    ),
-
-                    Text(
-                      "متاح لاستقبال الطلبات",
-
-                      style: TextStyle(
-                        shadows: [
-                          Shadow(
-                            color: Boxshadowcolor,
-                            offset: Offset(5, 5),
-                            blurRadius: 5,
-                          ),
-                        ],
-                        color: DarkTeal,
-                        fontSize: 11,
-                        fontFamily: "Cairo",
-                        fontWeight: FontWeight.w700,
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    textDirection: TextDirection.rtl,
+                    children: [
+                      Text(
+                        " ●",
+                        style: TextStyle(
+                          color: Rust,
+                          fontSize: 11,
+                          shadows: [
+                            Shadow(
+                              color: Boxshadowcolor,
+                              offset: Offset(5, 5),
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      Text(
+                        "متاح لاستقبال الطلبات",
+                        style: TextStyle(
+                          shadows: [
+                            Shadow(
+                              color: Boxshadowcolor,
+                              offset: Offset(5, 5),
+                              blurRadius: 5,
+                            ),
+                          ],
+                          color: DarkTeal,
+                          fontSize: 11,
+                          fontFamily: "Cairo",
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

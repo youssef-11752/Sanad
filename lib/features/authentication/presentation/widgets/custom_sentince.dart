@@ -2,8 +2,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:sanad/core/theme/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// One-line prompt with a tappable action, e.g. "Don't have an account? Sign up".
-/// text1 is the plain prompt, text2 is the green link-style button.
 class CustomSentince extends StatelessWidget {
   const CustomSentince({
     super.key,
@@ -24,7 +22,6 @@ class CustomSentince extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(text1, style: TextStyle(fontSize: 11.sp)),
-          // Zero padding and shrink-wrapped tap target so the link sits right next to the plain text.
           TextButton(
             onPressed: onTap,
             style: TextButton.styleFrom(

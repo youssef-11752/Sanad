@@ -2,8 +2,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:sanad/core/theme/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// Full-width red action button; swaps its label for a spinner while a request is running.
-/// It has no onPressed on purpose: callers wrap it in their own tap handler.
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.text, this.isLoading = false});
 
@@ -20,7 +18,6 @@ class CustomButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
         color: AppThemes.redColor,
       ),
-      // Spinner replaces the text so the button keeps the same size while loading.
       child: isLoading
           ? SizedBox(
               height: 24.h,

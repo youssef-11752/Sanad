@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sanad/features/auth/data/model/user_role.dart';
+import 'package:sanad/features/authentication/data/model/user_role.dart';
 
 void main() {
   // Unit tests for turning raw role labels into the two app roles.

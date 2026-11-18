@@ -2,8 +2,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// Shared styled text field for the auth forms.
-/// Handles the show/hide toggle for password fields; validation is supplied by the caller.
 class CustomTextformfield extends StatefulWidget {
   const CustomTextformfield({
     super.key,
@@ -37,24 +35,20 @@ class CustomTextformfield extends StatefulWidget {
   State<CustomTextformfield> createState() => _CustomTextformfieldState();
 }
 
-// Tracks whether the password text is currently hidden.
 class _CustomTextformfieldState extends State<CustomTextformfield> {
   bool isObsecure = true;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      // Validate as the user types/leaves the field, not only on submit.
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: widget.validator,
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
-      // Only password fields are ever obscured.
       obscureText: widget.isPassword && isObsecure,
       controller: widget.controller,
       decoration: InputDecoration(
         filled: true,
         fillColor: widget.fillcolor,
-        // Eye icon toggles password visibility; other fields have no suffix.
         suffixIcon: widget.isPassword
             ? IconButton(
                 onPressed: () {
@@ -69,7 +63,6 @@ class _CustomTextformfieldState extends State<CustomTextformfield> {
                 ),
               )
             : null,
-        // Same border for enabled and default states so the outline color stays consistent.
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(width: 1.w, color: widget.bordercolor),
@@ -84,12 +77,10 @@ class _CustomTextformfieldState extends State<CustomTextformfield> {
   }
 }
 
-/// Central place for form validation rules, so every screen shows the same error messages.
 // validators
 class Validators {
   Validators._();
 
-  // Simple email check; requires a .com ending.
   static final RegExp _emailRegex = RegExp(
     r'^[a-zA-Z0-9]+([._%+\-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.\-][a-zA-Z0-9]+)*\.com$',
     caseSensitive: false,
@@ -109,9 +100,8 @@ class Validators {
     final v = value?.trim() ?? '';
     if (v.isEmpty) return 'Email is required';
     if (v.length > 254) return 'Email is too long';
-    if (!_emailRegex.hasMatch(v)) {
+    if (!_emailRegex.hasMatch(v))
       return 'Email must be valid and end with .com';
-    }
     return null;
   }
 
@@ -149,7 +139,6 @@ class Validators {
     return null;
   }
 
-  // Login only checks that something was entered, so existing accounts with older passwords can still sign in.
   // الباسورد في اللوجين: بس مطلوب (متقيدوش بقواعد)
   static String? loginPassword(String? value) {
     if (value == null || value.isEmpty) return 'Password is required';

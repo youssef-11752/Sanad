@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 
@@ -33,11 +34,11 @@ class MainBottomNavigation extends StatelessWidget {
           : localizations.myRequestsNavigation,
       localizations.accountNavigation,
     ];
-    const icons = [
-      Icons.home_outlined,
-      Icons.grid_view_outlined,
-      Icons.receipt_long_outlined,
-      Icons.person_outline,
+    const iconAssets = [
+      'assets/icons/house.svg',
+      'assets/icons/layout-grid.svg',
+      'assets/icons/clipboard-list.svg',
+      'assets/icons/user-round.svg',
     ];
 
     // white bar with a thin top border, padded for the system gesture area
@@ -56,7 +57,7 @@ class MainBottomNavigation extends StatelessWidget {
               for (var index = 0; index < destinations.length; index++)
                 Expanded(
                   child: _NavigationItem(
-                    icon: icons[index],
+                    iconAsset: iconAssets[index],
                     label: labels[index],
                     isSelected: selectedDestination == destinations[index],
                     onTap: () => _selectDestination(
@@ -114,13 +115,13 @@ class MainBottomNavigation extends StatelessWidget {
 // single tab item: icon + label, with a small underline when selected
 class _NavigationItem extends StatelessWidget {
   const _NavigationItem({
-    required this.icon,
+    required this.iconAsset,
     required this.label,
     required this.isSelected,
     required this.onTap,
   });
 
-  final IconData icon;
+  final String iconAsset;
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
@@ -141,7 +142,12 @@ class _NavigationItem extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, color: color, size: 18),
+              SvgPicture.asset(
+                iconAsset,
+                width: 18,
+                height: 18,
+                colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+              ),
               const SizedBox(height: 2),
               Text(
                 label,

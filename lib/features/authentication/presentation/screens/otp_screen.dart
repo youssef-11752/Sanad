@@ -1,22 +1,17 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
-import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_appbarText.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textFormField.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textLabel.dart';
+import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
-/// Verifies the 6-digit recovery code sent by email. The email arrives from
-/// the previous screen through route `extra`.
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key, required this.email, this.role = 'customer'});
-
+  const OtpScreen({super.key, required this.email});
   final String email;
-  final String role;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -34,20 +29,14 @@ class _OtpScreenState extends State<OtpScreen> {
     super.dispose();
   }
 
-  // Check the code with Supabase and continue to the new password screen.
   Future<void> _verify() async {
     if (isLoading) return;
     if (!globKey.currentState!.validate()) return;
 
     setState(() => isLoading = true);
-    final success = await Auth().verifyOtp(
-      widget.email,
-      otpController.text,
-      context,
-    );
+    await Auth().verifyOtp(widget.email, otpController.text, context);
     if (!mounted) return;
     setState(() => isLoading = false);
-    if (success) context.go('/newPassword/${widget.role}');
   }
 
   @override
@@ -79,7 +68,6 @@ class _OtpScreenState extends State<OtpScreen> {
                     child: CustomTextformfield(
                       validator: Validators.otp,
                       keyboardType: TextInputType.number,
-                      // Numbers only, capped at 6 digits.
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
                         LengthLimitingTextInputFormatter(6),

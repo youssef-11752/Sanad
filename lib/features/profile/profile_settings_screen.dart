@@ -150,7 +150,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         _sectionTitle(context, l10n.yourAccount),
                         const SizedBox(height: 11),
                         SettingsTile(
-                          icon: Icons.person_outline,
+                          iconAsset: 'assets/icons/user-round.svg',
                           title: l10n.personalProfile,
                           subtitle: l10n.personalProfileSubtitle,
                           // providers see their profile read-only; customers can edit and save
@@ -166,7 +166,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         ),
                         const SizedBox(height: 10),
                         SettingsTile(
-                          icon: Icons.notifications_none,
+                          iconAsset: 'assets/icons/bell.svg',
                           title: l10n.notifications,
                           subtitle: _notificationsEnabled
                               ? l10n.notificationsEnabled
@@ -181,7 +181,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         _sectionTitle(context, l10n.appPreferences),
                         const SizedBox(height: 11),
                         SettingsTile(
-                          icon: Icons.wb_sunny_outlined,
+                          iconAsset: 'assets/icons/sun.svg',
                           title: l10n.appearance,
                           subtitle: _appearanceSubtitle(l10n),
                           // the screen is awaited in _openAppearanceScreen so this subtitle refreshes on return
@@ -189,7 +189,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         ),
                         const SizedBox(height: 10),
                         SettingsTile(
-                          icon: Icons.translate,
+                          iconAsset: 'assets/icons/languages.svg',
                           title: l10n.language,
                           subtitle: l10n.languageSubtitle,
                           onTap: () => Navigator.of(context).push<void>(
@@ -200,7 +200,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         ),
                         const SizedBox(height: 10),
                         SettingsTile(
-                          icon: Icons.shield_outlined,
+                          iconAsset: 'assets/icons/shield-check.svg',
                           title: l10n.privacyAndServicePolicy,
                           onTap: () => Navigator.of(context).push<void>(
                             MaterialPageRoute<void>(
@@ -210,7 +210,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         ),
                         const SizedBox(height: 10),
                         SettingsTile(
-                          icon: Icons.help_outline,
+                          iconAsset: 'assets/icons/circle-help.svg',
                           title: l10n.helpAndSupport,
                           subtitle: l10n.helpAndSupportSubtitle,
                           onTap: () => Navigator.of(context).push<void>(
@@ -348,7 +348,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     setState(() {});
   }
 
-  /// Confirmation dialog, then signs out and returns to role selection.
+  /// Confirmation dialog, then signs out and returns to customer login.
   void _confirmLogout(AppLocalizations l10n) {
     showDialog<void>(
       context: context,
@@ -367,7 +367,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               try {
                 await Auth().signOut();
                 // check mounted before using the context after the await
-                if (mounted) context.go('/role-selection');
+                if (mounted) context.go('/login/customer');
               } catch (error) {
                 if (!mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(

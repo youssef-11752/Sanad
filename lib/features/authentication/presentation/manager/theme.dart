@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 
-/// Small notifier that flips between light and dark mode.
 class ToggleTheme extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.light;
 

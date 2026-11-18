@@ -20,6 +20,7 @@ abstract final class AppThemes {
   static ThemeData get lightTheme => ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
+    fontFamily: 'Cairo',
     scaffoldBackgroundColor: cremeyColor,
     colorScheme: const ColorScheme.light(
       primary: greenColor,
@@ -66,6 +67,7 @@ abstract final class AppThemes {
   static ThemeData get darkTheme => ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
+    fontFamily: 'Cairo',
     scaffoldBackgroundColor: darkGreen,
     colorScheme: const ColorScheme.dark(
       primary: darkCremey,

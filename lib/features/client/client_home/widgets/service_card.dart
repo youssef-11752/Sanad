@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/client/client_home/models/service_model.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
@@ -49,7 +50,15 @@ class ServiceCards extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(service.icon, color: AppThemes.greenColor, size: 24),
+                  SvgPicture.asset(
+                    service.iconAsset,
+                    width: 24,
+                    height: 24,
+                    colorFilter: const ColorFilter.mode(
+                      AppThemes.greenColor,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                   SizedBox(height: 8),
                   Text(
                     title,

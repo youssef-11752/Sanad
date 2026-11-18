@@ -1,18 +1,17 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:sanad/core/theme/colors.dart';
-import 'package:sanad/core/widgets/custom_SnakBar.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_Button.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_appbarText.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_sentince.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textFormField.dart';
 import 'package:sanad/features/authentication/presentation/widgets/custom_textLabel.dart';
+import 'package:sanad/core/theme/colors.dart';
+import 'package:sanad/core/widgets/custom_SnakBar.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-/// Customer signup form: name, email, city, area and password, plus a
-/// required privacy-policy checkbox.
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
@@ -42,7 +41,6 @@ class _SignupScreenState extends State<SignupScreen> {
     super.dispose();
   }
 
-  // Validate the form, make sure the policy box is ticked, then register.
   Future<void> _signup() async {
     if (isLoading) return;
     if (!globKey.currentState!.validate()) return;
@@ -64,8 +62,13 @@ class _SignupScreenState extends State<SignupScreen> {
     if (!mounted) return;
     setState(() => isLoading = false);
 
-    // After signup the user must confirm their email, so go to login.
-    if (ok) context.go('/login/customer');
+    if (ok) {
+      if (Supabase.instance.client.auth.currentUser != null) {
+        context.go('/customer/management');
+      } else {
+        context.go('/loginUser');
+      }
+    }
   }
 
   @override
@@ -169,7 +172,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
               SizedBox(height: 15.h),
-              // Privacy/terms checkbox; signup is blocked until it is checked.
               Row(
                 children: [
                   Checkbox(
@@ -210,7 +212,7 @@ class _SignupScreenState extends State<SignupScreen> {
               Padding(
                 padding: EdgeInsets.all(8.w),
                 child: CustomSentince(
-                  onTap: () => context.go('/login/customer'),
+                  onTap: () => context.go('/loginUser'),
                   text1: AppLocalizations.of(context)!.haveAccount,
                   text2: AppLocalizations.of(context)!.loginButton,
                 ),

@@ -29,7 +29,7 @@ class _RoleLoginScreenState extends State<RoleLoginScreen> {
     super.dispose();
   }
 
-  // Reuse one login form while validating customer/provider roles separately.
+  // Reuse one login form and route by the role stored in Supabase.
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate() || _isSubmitting) return;
     setState(() => _isSubmitting = true);
@@ -37,13 +37,16 @@ class _RoleLoginScreenState extends State<RoleLoginScreen> {
       email: _emailController.text.trim(),
       password: _passwordController.text,
       context: context,
-      expectedRole: widget.role,
     );
     if (!mounted) return;
     setState(() => _isSubmitting = false);
     if (success) {
-      // Route to the destination that matches the verified database role.
-      context.go(_isProvider ? '/provider/dashboard' : '/customer/management');
+      // Route to the destination that matches the role stored in Supabase.
+      final role = await Auth().currentUserRole();
+      if (!mounted) return;
+      context.go(
+        role == 'provider' ? '/provider/dashboard' : '/customer/management',
+      );
     }
   }
 
@@ -55,12 +58,11 @@ class _RoleLoginScreenState extends State<RoleLoginScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(strings.appName),
-          // Back goes to role selection, not the previous route, since login is
-          // reached with `go` and may have no history.
+          // Back from this legacy shared login form goes to customer login.
           leading: IconButton(
             tooltip: strings.isArabic ? 'رجوع' : 'Back',
             icon: const Icon(Icons.arrow_back),
-            onPressed: () => context.go('/role-selection'),
+            onPressed: () => context.go('/login/customer'),
           ),
         ),
         // Centered, max 480px wide, and scrollable so the keyboard does not overflow.

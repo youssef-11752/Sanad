@@ -1,5 +1,7 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sanad/core/theme/colors.dart';
+import 'package:sanad/core/constants/Colors.dart' show Boxshadowcolor;
 import 'package:sanad/features/client/client_services_categories/models/service_category.dart';
 
 // Colors used across the categories screen.
@@ -92,11 +94,18 @@ class CategorySearchField extends StatelessWidget {
         controller: controller,
         onChanged: onChanged,
         textAlign: TextAlign.right,
-        style: const TextStyle(color: Colors.white, fontSize: 11),
+        style: const TextStyle(color: AppThemes.whiteColor, fontSize: 11),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: const TextStyle(color: Colors.white70, fontSize: 10),
-          suffixIcon: const Icon(Icons.search, color: Colors.white70, size: 17),
+          hintStyle: const TextStyle(
+            color: AppThemes.privacyColor,
+            fontSize: 10,
+          ),
+          suffixIcon: const Icon(
+            Icons.search,
+            color: AppThemes.privacyColor,
+            size: 17,
+          ),
           filled: true,
           fillColor: categoriesTealColor,
           contentPadding: const EdgeInsets.symmetric(vertical: 8),
@@ -138,7 +147,7 @@ class ServiceCategoryCard extends StatelessWidget {
             border: Border.all(color: AppThemes.darkCremey),
             boxShadow: const [
               BoxShadow(
-                color: Color(0x1F5E5948),
+                color: Boxshadowcolor,
                 blurRadius: 3,
                 offset: Offset(0, 2),
               ),
@@ -154,7 +163,15 @@ class ServiceCategoryCard extends StatelessWidget {
                   color: AppThemes.mediumGreen,
                   borderRadius: BorderRadius.circular(6),
                 ),
-                child: Icon(category.icon, color: Colors.white, size: 16),
+                child: SvgPicture.asset(
+                  category.iconAsset,
+                  width: 16,
+                  height: 16,
+                  colorFilter: const ColorFilter.mode(
+                    AppThemes.whiteColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
               const SizedBox(width: 8),
               Expanded(

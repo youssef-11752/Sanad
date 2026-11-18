@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:material_ui/material_ui.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sanad/features/auth/presentation/screens/splash_Screen.dart';
+import 'package:sanad/features/splash/splash_Screen.dart';
 import 'package:sanad/features/onboarding/screens/onboarding_screen.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +30,7 @@ class _SplashTestAssetBundle extends CachingAssetBundle {
   }
 }
 
-// Minimal router with the splash, onboarding and a dummy role-selection page.
+// Minimal router with the splash, onboarding and a dummy customer login page.
 Widget _testApp() {
   final router = GoRouter(
     initialLocation: '/splash',
@@ -45,9 +44,9 @@ Widget _testApp() {
         builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
-        path: '/role-selection',
+        path: '/login/customer',
         builder: (context, state) => const Scaffold(
-          body: Center(child: Text('Role selection destination')),
+          body: Center(child: Text('Customer login destination')),
         ),
       ),
     ],
@@ -105,7 +104,7 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  // Once onboarding is marked completed, the splash goes straight to role selection.
+  // Once onboarding is marked completed, the splash goes straight to customer login.
   testWidgets('shows splash then skips onboarding after it was completed', (
     tester,
   ) async {
@@ -116,13 +115,13 @@ void main() {
     await tester.pumpWidget(_testApp());
 
     expect(find.byType(SplashScreen), findsOneWidget);
-    expect(find.text('Role selection destination'), findsNothing);
+    expect(find.text('Customer login destination'), findsNothing);
 
     await tester.pump(const Duration(milliseconds: 4800));
     await tester.pumpAndSettle();
 
     expect(find.byType(SplashScreen), findsNothing);
-    expect(find.text('Role selection destination'), findsOneWidget);
+    expect(find.text('Customer login destination'), findsOneWidget);
     expect(find.byType(OnboardingScreen), findsNothing);
     expect(tester.takeException(), isNull);
   });
@@ -168,7 +167,7 @@ void main() {
   });
 
   // Finishing the last page saves the completed flag and navigates on.
-  testWidgets('start now completes onboarding and opens role selection', (
+  testWidgets('start now completes onboarding and opens customer login', (
     tester,
   ) async {
     await _openFirstRunOnboarding(tester);
@@ -180,13 +179,13 @@ void main() {
     await tester.tap(find.text('ابدأ الآن'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Role selection destination'), findsOneWidget);
+    expect(find.text('Customer login destination'), findsOneWidget);
     final preferences = await SharedPreferences.getInstance();
     expect(preferences.getBool(OnboardingScreen.completedKey), isTrue);
   });
 
   // Skipping also counts as completing onboarding.
-  testWidgets('skip completes onboarding and opens role selection', (
+  testWidgets('skip completes onboarding and opens customer login', (
     tester,
   ) async {
     await _openFirstRunOnboarding(tester);
@@ -194,7 +193,7 @@ void main() {
     await tester.tap(find.text('تخطي'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Role selection destination'), findsOneWidget);
+    expect(find.text('Customer login destination'), findsOneWidget);
     final preferences = await SharedPreferences.getInstance();
     expect(preferences.getBool(OnboardingScreen.completedKey), isTrue);
   });

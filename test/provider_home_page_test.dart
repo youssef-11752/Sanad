@@ -6,8 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:sanad/core/routes/app_router.dart';
-import 'package:sanad/features/provider/Home_Page/widgets/BottomNavigationBarWidget.dart';
-import 'package:sanad/features/provider/Home_Page/screens/provider_home_page.dart';
+import 'package:sanad/features/provider/provider_home/widgets/BottomNavigationBarWidget.dart';
+import 'package:sanad/features/provider/provider_home/screens/provider_home.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 
 void main() {
@@ -91,7 +91,7 @@ void main() {
       ),
     );
 
-    await tester.tap(find.byIcon(Icons.person_outline));
+    await tester.tap(find.byIcon(Icons.person_outline_rounded));
     await tester.pumpAndSettle();
 
     expect(find.text('Provider profile destination'), findsOneWidget);

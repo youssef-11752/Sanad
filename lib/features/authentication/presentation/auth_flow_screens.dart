@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sanad/core/theme/colors.dart';
 import 'package:sanad/features/authentication/data/repo/auth.dart';
 import 'package:sanad/features/authentication/presentation/auth_strings.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Signup form shared by customers and providers; the role decides where the
 /// user lands afterwards.
@@ -61,11 +62,16 @@ class _SignupScreenState extends State<SignupScreen> {
     // The screen may have been closed while the request was running.
     if (!mounted) return;
     setState(() => _isSubmitting = false);
-    // Send the user to the matching login screen so they can sign in.
+    // Enter the customer area when signup creates a session immediately.
     if (success) {
-      context.go(
-        widget.role == 'provider' ? '/login/provider' : '/login/customer',
-      );
+      if (Supabase.instance.client.auth.currentUser != null &&
+          widget.role == 'customer') {
+        context.go('/customer/management');
+      } else {
+        context.go(
+          widget.role == 'provider' ? '/login/provider' : '/login/customer',
+        );
+      }
     }
   }
 
