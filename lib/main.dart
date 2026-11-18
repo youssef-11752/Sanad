@@ -1,9 +1,11 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sanad/core/app_preferences.dart';
 import 'package:sanad/core/routes/app_router.dart';
 import 'package:sanad/core/theme/colors.dart';
+import 'package:sanad/features/authentication/AuthLoggedUser.dart';
 import 'package:sanad/features/authentication/presentation/auth_strings.dart';
 import 'package:sanad/l10n/generated/app_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -11,7 +13,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 // App entry point. Supabase is initialized later inside MyApp so a failure can be shown on screen.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => AuthLoggedUser(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
